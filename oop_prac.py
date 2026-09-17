@@ -1,8 +1,8 @@
 class Department:
-    def _init_(self,DeptID,Name,Number_of_staff):
-       self.DeptID = DeptID
-       self.Name =Name
-       self. Number_of_staff =Number_of_staff
+    def __init__(self,deptid,name,number_of_staff):
+       self.deptid = deptid
+       self.name =name
+       self.number_of_staff = number_of_staff
 
     def add(self):
         pass
