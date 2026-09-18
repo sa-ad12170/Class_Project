@@ -10,7 +10,8 @@ while True :
     u_name = input ('Enter department name  :')
     u_staff = int(input ('Enter number of staff  :'))
 
-    department = Department(u_deptid,u_name,u_staff)
+    department = Department(u_deptid,u_name,u_staff)          #question to be raised
+
 
     new_dept = {
         'department_id' : department.deptid,
@@ -18,13 +19,15 @@ while True :
         'number_of_staff':department.number_of_staff
     }
 
+    with open ('dept.json','r') as file :
+        depart = json.load(file)
+        
+
     with open ("dept.json",'w') as file :
             depart.append(new_dept)
-            json.dump( new_dept,file, indent = 4)
+            json.dump( depart,file, indent = 4)
     
-    with open ('dept.json','r') as file :
-        
-        depart = json.load(file)
+
 
    
     add_depat = input ('Do you want to add another department (y/n) :')    
