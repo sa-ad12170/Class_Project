@@ -1,7 +1,15 @@
 from oop_prac import Department
 import json
 #DeptID,Name,Number_of_staff
-depart = []
+
+try:
+    with open ('dept.json','r') as file :
+            depart = json.load(file)
+
+
+except FileNotFoundError:
+    print("File not found. Creating a new file.")
+    depart = []
 
 
 while True :
@@ -19,8 +27,7 @@ while True :
         'number_of_staff':department.number_of_staff
     }
 
-    with open ('dept.json','r') as file :
-        depart = json.load(file)
+    
         
 
     with open ("dept.json",'w') as file :
