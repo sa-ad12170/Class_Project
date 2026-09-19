@@ -28,5 +28,15 @@
         "department_id": "43",
         "department_name": "oi",
         "number_of_staff": 56
+    },
+    {
+        "department_id": "s4343",
+        "department_name": "SALES",
+        "number_of_staff": 32
+    },
+    {
+        "department_id": "i4324",
+        "department_name": "IT",
+        "number_of_staff": 43
     }
 ]
