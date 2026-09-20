@@ -6,14 +6,14 @@ from datetime import datetime
 currentyear = datetime.today().year
 
 try:
-    with open ('dept.json','r') as file :
+    with open ('employee.json','r') as file :
             employees = json.load(file)
 
 
 except FileNotFoundError:
     print("File not found. Creating a new file.")
     employees= []
-employees = []    
+#employees = []    
 
 while True :
 #user input    
@@ -55,7 +55,7 @@ while True :
 
     with open ("employee.json",'w') as file :
             employees.append(new_employee)
-            json.dump( new_employee,file, indent = 4)
+            json.dump( employees,file, indent = 4)
 
         
     add_depat = input ('Do you want to add employee  (y/n) :')    
