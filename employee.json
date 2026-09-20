@@ -1,0 +1,28 @@
+[
+    {
+        "employeeid": "01",
+        "First name ": "Barry",
+        "Last name ": "Allen",
+        "Birth year": 1999,
+        "Department": "csi",
+        "Gender": "m",
+        "Status": "m",
+        "Position": null,
+        "Contact": "2345",
+        "Address": "CE in ED",
+        "Age": 27
+    },
+    {
+        "employeeid": "02",
+        "First name ": "oliver",
+        "Last name ": "queen",
+        "Birth year": 1989,
+        "Department": "fight",
+        "Gender": "m",
+        "Status": "m",
+        "Position": null,
+        "Contact": "2345",
+        "Address": "T\\ST in CT",
+        "Age": 37
+    }
+]

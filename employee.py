@@ -1,4 +1,4 @@
-#HAS A bug PREVIOUS RECORCDS ARE OVER RIDDEN WITH THE NEW ENTRIES 
+
 
 from oop_prac import Employee
 import json
@@ -13,7 +13,7 @@ try:
 except FileNotFoundError:
     print("File not found. Creating a new file.")
     employees= []
-#employees = []    
+  
 
 while True :
 #user input    
