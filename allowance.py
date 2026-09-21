@@ -1,7 +1,7 @@
 from oop_prac import Allowance
 import json
 
-
+'''
 try:
     with open ('allowance.json','r') as file :
         allowances= json.load(file)
@@ -10,6 +10,7 @@ try:
 except FileNotFoundError:
     print("File not found. Creating a new file.")
     allowances= []
+'''    
 allowances = []    
 
 while True :
@@ -32,15 +33,15 @@ while True :
         
     }
 
-    
-        
-
-    with open ("employee.json",'w') as file :
+    with open ("allowance.json",'w') as file :
             allowances.append(new_allowance)
-            json.dump( new_allowance,file, indent = 4)
+            json.dump(new_allowance,file, indent = 4)
+
+    with open ('allowance.json','r') as file :
+            allowances = json.load(file)        
 
         
-    add_allowance = input ('Do you want to add another allowance   (y/n) :')    
+    add_allowance = input ('Do you want to add another allowance (y/n) : ')    
 
     if  add_allowance == 'y' :
         continue 
