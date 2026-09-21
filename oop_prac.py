@@ -2,7 +2,7 @@ class Department:
     def __init__(self,deptid,name,number_of_staff):
        self.deptid = deptid
        self.name =name
-       self.number_of_staff = number_of_staff
+       self.number_of_staff = number_of_staff#private to be
 
     def add(self):
         pass
@@ -18,10 +18,9 @@ class Department:
 
 #child class from employee parent class 
 class Position:
-    def __init__(self,title,department,name,salary):
+    def __init__(self,title,department,salary):
         self.title =title
         self.department =department
-        self.name =name
         self.salary =salary
 
     def  roles(self):
@@ -48,7 +47,7 @@ class Employee:
         self.__address = self.set_address()
         self.gender =gender
         self.status =status
-        self.position = None 
+        self.position = None #issue(should  not be none)
         self.__age = self.compute_age()
         self.salary = 0
        #need to make method for position 
@@ -158,7 +157,7 @@ class Payslip:
     def get_net(self):
         return self.__net
 
-    
+
         
         
     
