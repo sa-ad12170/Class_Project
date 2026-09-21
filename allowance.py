@@ -10,7 +10,8 @@ try:
 except FileNotFoundError:
     print("File not found. Creating a new file.")
     allowances= []
-allowances = []    
+   
+    
 
 while True :
 #user input    
@@ -34,9 +35,9 @@ while True :
 
     
         
+    allowances.append(new_allowance)
 
-    with open ("employee.json",'w') as file :
-            allowances.append(new_allowance)
+    with open ("allowance.json",'w') as file :
             json.dump( new_allowance,file, indent = 4)
 
         
