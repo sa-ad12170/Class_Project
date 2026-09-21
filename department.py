@@ -28,10 +28,10 @@ while True :
     }
 
     
-        
+    depart.append(new_dept)  
 
     with open ("dept.json",'w') as file :
-            depart.append(new_dept)
+            
             json.dump( depart,file, indent = 4)
     
 

@@ -69,15 +69,11 @@ class Employee:
     def get_age (self):
         return self.__age
 
-    def hired(self):
-        pass
 
-    def fired(self):
-        pass
-
-    def promoted(self):
-        pass
-# make a childclass salary from employee
+'''
+make a method status thatt combines the hired fired active and promoted 
+'''
+    # make a childclass salary from employee
 
 #child class of employee 
 class Deductions:
@@ -125,10 +121,12 @@ class Payroll:
     def __init__(self,issuer):
      self.issuer = issuer 
      self.date = self.caculate_date()
+     
     def caculate_date (self) :
      from datetime import datetime
      self.date = datetime.now()
      return self.date 
+    
     def __str__(self):
         return f'Payroll has been issused by {self.issuer} on {self.date}'
     #NEED TO GET A LIST OF ALL EMPLOYESS PAID AND THEIR RESPECTIVE SALARIES SO THAT WE CAN GET THE TOTAL OF THE PAYROLL 
