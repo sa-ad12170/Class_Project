@@ -16,7 +16,7 @@ class Department:
     def display(self):
         pass
 
-
+#child class from employee parent class 
 class Position:
     def __init__(self,title,department,name,salary):
         self.title =title
@@ -77,32 +77,41 @@ class Employee:
 
     def promoted(self):
         pass
+# make a childclass salary from employee
 
-
-
+#child class of employee 
 class Deductions:
-        def __init__(self,ID,Deductionname,Deductionrate,Payrollnumber,Amount,EmployeeID):
-            self.ID =ID
-            self.Deduction_name =Deductionname
-            self.Deduction_rate =Deductionrate
-            self.Payrollnumber =Payrollnumber
-            self.Amount =Amount
-            self.EmployeeID =EmployeeID
+        def __init__(self,id,deductionname,deductionrate,payrollnumber,employeeid,hoursworked,rateperhour):
+            self.id =id
+            self.deduction_name =deductionname
+            self.deduction_rate =deductionrate
+            self.payrollnumber =payrollnumber
+            self.employeeid =employeeid
+            self.hoursworked = hoursworked 
+            self.rateperhour = rateperhour
+            self.__salary = self.set_salary()
+            self.__amount = self.compute_amount()
 
-        def calculated(self):
-            pass
-
-        def complaint(self):
-            pass
+        def set_salary (self):
+            self.__salary = self.hoursworked  * self.rateperhour  
+            return self.__salary
+        def get_salary (self):
+            return self.__salary 
+#different rates for different deductions
+        def compute_amount(self):
+            self.__amount =  (self.__salary * (self.deduction_rate/100 ))
+            return self.__amount
+        def get_amount (self):
+            return self.__amount
 
 
 class Allowance:
-    def __init__(self,ID,PayrollID,EmploymentID,Name,Rate):
-        self.ID =ID
-        self.PayrollID =PayrollID
-        self.EmploymentID =EmploymentID
-        self.Name =Name
-        self.Rate =Rate
+    def __init__(self,id,payrollid,employmentid,name,rate):
+        self.id =id
+        self.payrollid =payrollid
+        self.employmentid =employmentid
+        self.name =name
+        self.rate =rate
 
     def fixed(self):
         pass
@@ -113,41 +122,45 @@ class Allowance:
 
 
 class Payroll:
-    def __init__(self,ID,Year,Date,Month):
-        self.ID =ID
-        self.Year =Year
-        self.Date =Date
-        self.Month =Month
+    def __init__(self,issuer):
+     self.issuer = issuer 
+     self.date = self.caculate_date()
+    def caculate_date (self) :
+     from datetime import datetime
+     self.date = datetime.now()
+     return self.date 
+    def __str__(self):
+        return f'Payroll has been issused by {self.issuer} on {self.date}'
+    #NEED TO GET A LIST OF ALL EMPLOYESS PAID AND THEIR RESPECTIVE SALARIES SO THAT WE CAN GET THE TOTAL OF THE PAYROLL 
 
-    def generated(self):
-        pass
-
-    def reported(self):
-        pass
-
-    def calculated(self):
-        pass
+    
 
 
-
+#child class from employeeS
 class Payslip:
-    def __init__(self,ID,Employeename,Totaldeductions,Totalallowances,Gross,Net,Hoursworked):
-        self.ID =ID
-        self.Employeename =Employeename
-        self.Totaldeductions =Totaldeductions
-        self.Totalallowances =Totalallowances
-        self.Gross =Gross
-        self.Net =Net
-        self.Hoursworked =Hoursworked
+    def __init__(self,id,employeename,totaldeductions,totalallowances,gross,hoursworked):
+        self.id =id
+        self.employeename =employeename
+        self.__totaldeductions =totaldeductions
+        self.__totalallowances =totalallowances
+        self.__gross = gross
+        self.__net = self.compute_net()
+        self.__hoursworked =hoursworked
 
-    def issues(self):
-        pass
+    
 
-    def personalised(self):
-        pass
+    def setgross(self)  :
+        self.__gross = self.__totalallowances #we nedd ythe salary from the parent class 
 
-    def summarised(self):
-        pass
+
+
+    def compute_net(self):
+        self.__net = self.__gross - self.__totaldeductions
+        return self.__net 
+    def get_net(self):
+        return self.__net
+
+    
         
         
     
