@@ -59,9 +59,9 @@ while True :
             json.dump( new_employee,file, indent = 4)
 
         
-    add_depat = input ('Do you want to add employee  (y/n) :')    
+    add_employee = input ('Do you want to add employee  (y/n) :')    
 
-    if  add_depat == 'y' :
+    if  add_employee == 'y' :
         continue 
     else :
         break 
