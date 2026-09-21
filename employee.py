@@ -2,8 +2,7 @@
 
 from oop_prac import Employee
 import json
-from datetime import datetime
-currentyear = datetime.today().year
+
 
 try:
     with open ('employee.json','r') as file :
@@ -30,9 +29,11 @@ while True :
     u_city = input('Enter city : ')
     
     
+    
+    
 
     employee = Employee(u_employeeid,u_fname,u_last ,u_dateofbirth,u_department,u_gender ,u_status,u_contact ,u_village,u_city) 
-    #employee.compute_age(currentyear)
+    
 
 
     new_employee = {
@@ -58,9 +59,9 @@ while True :
             json.dump( employees,file, indent = 4)
 
         
-    add_depat = input ('Do you want to add employee  (y/n) :')    
+    add_employee = input ('Do you want to add employee  (y/n) :')    
 
-    if  add_depat == 'y' :
+    if  add_employee == 'y' :
         continue 
     else :
         break 
