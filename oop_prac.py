@@ -96,18 +96,19 @@ class Salary :
         
 #child class of employee 
 class Deductions:
-        def __init__(self,id,deductionname,deductionrate,payrollnumber,employeeid,hoursworked,rateperhour):
+        def __init__(self,id,deductionname,deductionrate,payrollnumber,employeeid,salary):
             self.id =id
             self.deduction_name =deductionname
             self.deduction_rate =deductionrate
             self.payrollnumber =payrollnumber
             self.employeeid =employeeid
+            self.salary = salary
             self.__amount = self.compute_amount()
 
         
 #different rates for different deductions
-        def compute_amount(self,salary):
-            self.__amount =  (salary * (self.deduction_rate/100 ))
+        def compute_amount(self):
+            self.__amount =  (self.salary * (self.deduction_rate/100 ))
             return self.__amount
         def get_amount (self):
             return self.__amount
@@ -155,7 +156,7 @@ class Payslip:
         self.totaldeductions =totaldeductions
         self.totalallowances =totalallowances
         self.hoursworked =hoursworked
-        self.__gross = self.get_gross()
+        self.__gross = 0 
         self.__net = self.compute_net()
         
 
@@ -171,7 +172,7 @@ class Payslip:
 
 
     def compute_net(self):
-        self.__net = self.__gross - self.__totaldeductions
+        self.__net = self.__gross - self.totaldeductions
         return self.__net 
     def get_net(self):
         return self.__net
