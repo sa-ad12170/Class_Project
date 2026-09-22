@@ -161,11 +161,11 @@ class Payslip:
         
 
     def __str__(self):
-        return f'Payslip id -------->{self.id}\nTotal Deductions\t: {self.totaldeductions}\nTotal Allowances\t: {self.totalallowances}\nHours Worked\t: {self.hoursworked}'
+        return f'Payslip id -------->\t{self.id}\nTotal Deductions\t: {self.totaldeductions}\nTotal Allowances\t: {self.totalallowances}\nHours Worked\t: {self.hoursworked}'
 
     def set_gross(self,salary)  :
         self.__gross = salary  + self.totalallowances
-        return self.__gross 
+        return self.__gross
         
     def get_gross (self):
         return self.__gross 
