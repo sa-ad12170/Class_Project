@@ -1,20 +1,29 @@
 class Department:
-    def __init__(self,deptid,name,number_of_staff):
+    def __init__(self,deptid,name):
        self.deptid = deptid
-       self.name =name
-       self.number_of_staff = number_of_staff#private to be
+       self.departmentname =name
+       #self.number_of_staff = number_of_staff#private to be
+       self.staff = []
 
-    def add(self):
-        pass
+    def add_staff(self,employee):
+        self.staff.append (employee)
+        return self.staff
 
-    def count(self):
-        pass
+    def remove_staff(self,employee_id):
+        for employee in self.staff :
+            self.staff.remove(employee)
+            return (f'Staff member has been removed ')
 
-    def remove(self):
-        pass
+    def display_staff(self):
+        print (f'Staff in {self.departmentname}:')
+        if len(self.staff) == 0 :
+            print ('No staff in this department ')
+        for employee in self.staff :
+            print(f"ID : {employee['id']}\nName : {employee['name']}\nPosition:{employee['position']}")
 
-    def display(self):
-        pass
+    def get_no_of_staff(self)  :
+        return len(self.staff)      
+
 
 #child class from employee parent class 
 class Position:
@@ -146,16 +155,17 @@ class Payslip:
         self.totaldeductions =totaldeductions
         self.totalallowances =totalallowances
         self.hoursworked =hoursworked
-        self.__gross = self.get_gross()#method returns an error 
+        self.__gross = self.get_gross()
         self.__net = self.compute_net()
         
 
     def __str__(self):
         return f'Payslip id -------->{self.id}\nTotal Deductions\t: {self.totaldeductions}\nTotal Allowances\t: {self.totalallowances}\nHours Worked\t: {self.hoursworked}'
 
-    def setgross(self,salary)  :
-        self.__gross = salary  + self.__totalallowances
+    def set_gross(self,salary)  :
+        self.__gross = salary  + self.totalallowances
         return self.__gross 
+        
     def get_gross (self):
         return self.__gross 
 

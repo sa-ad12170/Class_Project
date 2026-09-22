@@ -7,11 +7,12 @@ u_employeename = input ('Enter employee name : ')
 u_totaldeductions = int(input ('Enter  totaldeductions : '))
 u_totalallowances= int(input ('Enter totalallowances  : '))
 u_hoursworked = int(input ('Enter hoursworked : '))
+#u_salary = int (input('Enter salary : '))
 
 payslip = Payslip (u_payslipid,u_employeename,u_totaldeductions,u_totalallowances,u_hoursworked)
 
 print(payslip)
-payslip.setgross(1000000)
+payslip.set_gross(1000000)
 gross = payslip.get_gross ()
 net = payslip.get_net()
 print(f'Total Gross : {gross}\nTotal net : {net}')
