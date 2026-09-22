@@ -25,7 +25,7 @@ while True :
     u_hours = int(input('Enter hours worked : '))
     u_rateperhour = int(input('Enter rate per hour  : '))
 
-    dedcution = Deductions(u_dedcutionid,u_decname,u_rate,u_payrollno,u_employeeid,u_hours,u_rateperhour)    
+    dedcution = Deductions(u_dedcutionid,u_decname,u_rate,u_payrollno,u_employeeid)    
 
 
     new_dedecution = {
