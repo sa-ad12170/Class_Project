@@ -17,25 +17,24 @@ except FileNotFoundError:
 
 while True :
 #user input    
-    u_dedcutionid = input ('Enter decution id :')
+    u_deductionid = input ('Enter deduction id :')
     u_decname = input ('Enter decution name  :')
     u_rate = int(input ('Enter rate of deduction  :'))
     u_payrollno = input ('Enter pay roll number  :')
     u_employeeid = input ('Enter employee id  :')
-    u_hours = int(input('Enter hours worked : '))
-    u_rateperhour = int(input('Enter rate per hour  : '))
+    u_salary = int(input('Enter employees salary : '))
+    
 
-    dedcution = Deductions(u_dedcutionid,u_decname,u_rate,u_payrollno,u_employeeid)    
-
+    deduction = Deductions(u_deductionid,u_decname,u_rate,u_payrollno,u_employeeid,u_salary)    
 
     new_dedecution = {
-        'dedcution_id' : dedcution.id,
-        'dedcution_name': dedcution.deduction_name,
-        'deduction_rate':dedcution.deduction_rate,
-        'Payroll number ' : dedcution.payrollnumber,
-        'Employee_id' : dedcution.employeeid,
-        'Salary ':dedcution.get_salary(),
-        'Amount to be paid' : dedcution.compute_amount(),
+        'deduction_id' : deduction.id,
+        'deduction_name': deduction.deduction_name,
+        'deduction_rate':deduction.deduction_rate,
+        'Payroll number ' : deduction.payrollnumber,
+        'Employee_id' : deduction.employeeid,
+        'salary' : deduction.salary,
+        'Amount to be paid' : deduction.compute_amount(),
         
     }
 
