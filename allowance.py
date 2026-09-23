@@ -6,6 +6,9 @@ try:
     with open ('allowance.json','r') as file :
         allowances= json.load(file)
 
+        print(type(allowances))
+        print(allowances)
+
 
 except FileNotFoundError:
      print("File not found. Creating a new file.")
@@ -28,7 +31,7 @@ while True :
     print(allowance)
 
     
-    allowances.append(allowance)
+    
 
     new_allowance = {
         'Allowance id' : allowance.id,
@@ -38,11 +41,15 @@ while True :
         'Allowance rate ' : allowance.rate,
         
     }
+
+    allowances.append(new_allowance)
         
  
     with open ("allowance.json",'w') as file :
-            
-            json.dump( new_allowance,file, indent = 4)
+            json.dump( allowances,file, indent = 4)
+
+
+
 
         
     add_allowance = input ('Do you want to add another allowance (y/n) : ')    

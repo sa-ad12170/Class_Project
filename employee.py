@@ -5,11 +5,17 @@ import json
 try:
     with open ('employee.json','r') as file :
             employees = json.load(file)
-
+            print(type(employees))
+            print(employees)
+ 
 
 except FileNotFoundError:
     print("File not found. Creating a new file.")
     employees= []
+
+except json.decoder.JSONDecodeError:
+     print('File not yet created. Creating a new file')
+     employees = []
   
 
 while True :
@@ -30,7 +36,7 @@ while True :
     
     
 
-    employee = Employee(u_employeeid,u_fname,u_last ,u_dateofbirth,u_department,u_gender ,u_status,u_contact ,u_village,u_city) 
+    employee = Employee(u_employeeid,u_fname,u_last ,u_dateofbirth,u_department,u_gender ,u_status,u_contact ,u_village,u_city,u_position) 
     
 
 
