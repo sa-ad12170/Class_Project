@@ -1,15 +1,11 @@
-                      
+
+                         
 from oop_prac import Department
-<<<<<<< Updated upstream
-import json
-=======
 
 data = {}
->>>>>>> Stashed changes
 
 departments = {}
 number = int(input('how many departments do you want to add : '))
-
 for i in range(number ):
     dept_id = input('Enter department id :')
     dept_name = input('Enter department name :')
@@ -17,19 +13,7 @@ for i in range(number ):
 
     department = Department(dept_id,dept_name)
 
-<<<<<<< Updated upstream
-    departments[dept_id] = department
-
-'''
-    departments[dept_id] = department
-    for department_id,department in departments.items ():
-        data [dept_id] = department.to_dict()
-        with open ('dept.json','w') as file :
-            json.dump(data,file,indent=4)
-'''            
-=======
          
->>>>>>> Stashed changes
 
 while True : 
     print ('\t\tMENU\n1.Add staff\n2.Remove staff\n3.Display staff\n4.Count staff\n5.Exit ')
@@ -37,7 +21,7 @@ while True :
     #add staff
     if choice == '1':
         dept_id = input ('Enter department id : ')
-        if dept_id in departments : # checks if the id entered is a member of the departments{}
+        if dept_id in departments : 
             name = input ('Enter staff name id : ')
             employeeid = input ('Enter employee id : ')
             position = input ('Enter position : ')
@@ -50,8 +34,8 @@ while True :
         print('staff member added sucessfully' ) 
 #remove staff 
     elif choice == '2' :
-        dept_id = input ('enter department id : ') 
-        if dept_id in departments : 
+        dept_id = input ('enter department id :') 
+        if department_id in departments : 
             employeeid = input ('enter staff  id  to remove :')
             departments[dept_id].remove_staff(employeeid)
             print("staff removed sucessfully ")
@@ -65,12 +49,12 @@ while True :
         if dept_id in departments :
             departments[dept_id].display_staff()
         else :
-            print ('Staff not found ') 
+            print ('Department not found ') 
 #count staff 
     elif choice  == '4'  : 
         department_id = input ('Enter department id : ')
         if dept_id in departments : 
-            number = departments[dept_id].get_no_of_staff()
+            number = departments[department_id].get_no_of_staff()
             print(f'Number of staff in department : {number}')
         else :
             print ('Department not found ') 
