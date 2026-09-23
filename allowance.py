@@ -46,7 +46,7 @@ while True :
         
  
     with open ("allowance.json",'w') as file :
-            json.dump( allowances,file, indent = 4)
+            json.dump(allowances,file, indent = 4)
 
 
 
