@@ -1,5 +1,4 @@
-
-                         
+                      
 from oop_prac import Department
 import json
 data = {}

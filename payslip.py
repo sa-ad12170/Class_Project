@@ -27,18 +27,19 @@ while True :
 
     new_payslip = {
         'Payslip id' : payslip.id,
+        'Employee name ' : payslip.employeename,
         'Total deductions  ' : payslip.totaldeductions,
         'Total allowances ' : payslip.totalallowances,
         'hours worked' : payslip.hoursworked,
-        'gross' :payslip.get_gross (),
-        'net' : payslip.get_net(),
+        'Gross' : payslip.get_gross (),
+        'Net' : payslip.get_net(),
         
     }
-    
+    payslips.append(new_payslip)
  
-    with open ("payslip.json",'w') as file :
-                payslips.append(new_payslip)
-                json.dump( new_payslip,file, indent = 4)
+    with open ("payslips.json",'w') as file :
+        
+        json.dump( payslips,file, indent = 4)
     
             
     add_payslip = input ('Do you want to add another payslip (y/n) : ')    

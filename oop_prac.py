@@ -22,7 +22,14 @@ class Department:
             print(f"ID : {employee['id']}\nName : {employee['name']}\nPosition:{employee['position']}")
 
     def get_no_of_staff(self)  :
-        return len(self.staff)      
+        return len(self.staff) 
+    #converting the class into  a json 
+    def to_dict (self )    :
+        return {
+            'Department id':self.deptid,
+            'Department name':self.departmentname,
+            'Department staff':self.staff,
+        } 
 
 
 #child class from employee parent class 
@@ -88,9 +95,11 @@ class Salary :
         self.hoursworked = hoursworked 
         self.rateperhour = rateperhour
         self.__salary =self.set_salary()
+
     def set_salary (self):
         self.__salary = self.hoursworked  * self.rateperhour  
         return self.__salary
+    
     def get_salary (self):
         return self.__salary     
         
