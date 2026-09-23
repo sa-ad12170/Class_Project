@@ -2,7 +2,6 @@ class Department:
     def __init__(self,deptid,name):
        self.deptid = deptid
        self.departmentname =name
-       #self.number_of_staff = number_of_staff#private to be
        self.staff = []
 
     def add_staff(self,employee):

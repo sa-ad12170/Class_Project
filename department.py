@@ -4,12 +4,14 @@ import json
 data = {}
 departments = {}
 number = int(input('how many departments do you want to add : '))
+
 for i in range(number ):
     dept_id = input('Enter department id :')
     dept_name = input('Enter department name :')
     #no_of_staff = input('Enter no of staff :')
 
     department = Department(dept_id,dept_name)
+    departments[dept_id] = department
 
 '''
     departments[dept_id] = department
@@ -25,7 +27,7 @@ while True :
     #add staff
     if choice == '1':
         dept_id = input ('Enter department id : ')
-        if dept_id in departments : 
+        if dept_id in departments : # checks if the id entered is a member of the departments{}
             name = input ('Enter staff name id : ')
             employeeid = input ('Enter employee id : ')
             position = input ('Enter position : ')
@@ -38,8 +40,8 @@ while True :
         print('staff member added sucessfully' ) 
 #remove staff 
     elif choice == '2' :
-        dept_id = input ('enter department id :') 
-        if department_id in departments : 
+        dept_id = input ('enter department id : ') 
+        if dept_id in departments : 
             employeeid = input ('enter staff  id  to remove :')
             departments[dept_id].remove_staff(employeeid)
             print("staff removed sucessfully ")
@@ -50,15 +52,15 @@ while True :
       
     elif choice == '3':
         dept_id = input ('Enter department id : ')
-        if department_id in departments :
+        if dept_id in departments :
             departments[dept_id].display_staff()
         else :
             print ('Department not found ') 
 #count staff 
     elif choice  == '4'  : 
         department_id = input ('Enter department id : ')
-        if department_id in departments : 
-            number = departments[department_id].get_no_of_staff()
+        if dept_id in departments : 
+            number = departments[dept_id].get_no_of_staff()
             print(f'Number of staff in department : {number}')
         else :
             print ('Department not found ') 
