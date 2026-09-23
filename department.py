@@ -1,6 +1,11 @@
                       
 from oop_prac import Department
+<<<<<<< Updated upstream
 import json
+=======
+
+data = {}
+>>>>>>> Stashed changes
 
 departments = {}
 number = int(input('how many departments do you want to add : '))
@@ -12,6 +17,7 @@ for i in range(number ):
 
     department = Department(dept_id,dept_name)
 
+<<<<<<< Updated upstream
     departments[dept_id] = department
 
 '''
@@ -21,6 +27,9 @@ for i in range(number ):
         with open ('dept.json','w') as file :
             json.dump(data,file,indent=4)
 '''            
+=======
+         
+>>>>>>> Stashed changes
 
 while True : 
     print ('\t\tMENU\n1.Add staff\n2.Remove staff\n3.Display staff\n4.Count staff\n5.Exit ')
