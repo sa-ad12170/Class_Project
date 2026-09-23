@@ -8,8 +8,12 @@ try:
 
 
 except FileNotFoundError:
-    print("File not found. Creating a new file.")
-    allowances= []
+     print("File not found. Creating a new file.")
+     allowances= []
+
+except json.decoder.JSONDecodeError:
+     print('File not yet created. Creating a new file')
+     allowances = []
     
 
 while True :
