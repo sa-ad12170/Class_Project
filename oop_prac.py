@@ -56,7 +56,7 @@ class Employee:
         self.__address = self.set_address()#irrelevant
         self.gender =gender
         self.status =status
-        self.position = None #issue(should  not be none)
+        self.position = position#issue(should  not be none)
         self.__age = self.compute_age()
         self.__salary = 0
        #need to make method for position 
