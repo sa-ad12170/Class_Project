@@ -34,19 +34,14 @@ while True :
         'Payroll number ' : deduction.payrollnumber,
         'Employee_id' : deduction.employeeid,
         'salary' : deduction.salary,
-        'Amount to be paid' : deduction.compute_amount(),
+        'Amount to be deducted' : deduction.compute_amount(),
         
     }
-
-    
-        
 
     with open ("deduction.json",'w') as file :
             dedcutions.append(new_dedecution)
             json.dump( dedcutions,file, indent = 4)
     
-
-
    
     add_depat = input ('Do you want to add another deduction (y/n) :')    
 

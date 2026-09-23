@@ -1,7 +1,7 @@
                       
 from oop_prac import Department
 import json
-data = {}
+
 departments = {}
 number = int(input('how many departments do you want to add : '))
 
@@ -11,6 +11,7 @@ for i in range(number ):
     #no_of_staff = input('Enter no of staff :')
 
     department = Department(dept_id,dept_name)
+
     departments[dept_id] = department
 
 '''
@@ -55,7 +56,7 @@ while True :
         if dept_id in departments :
             departments[dept_id].display_staff()
         else :
-            print ('Department not found ') 
+            print ('Staff not found ') 
 #count staff 
     elif choice  == '4'  : 
         department_id = input ('Enter department id : ')

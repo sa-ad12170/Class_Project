@@ -10,7 +10,7 @@ try:
 except FileNotFoundError:
     print("File not found. Creating a new file.")
     allowances= []
-allowances = []    
+    
 
 while True :
 #user input    
@@ -21,7 +21,10 @@ while True :
     u_rate =input('Enter allowance rate : ')
 
     allowance  = Allowance(u_id,u_payrollid,u_employmentid,u_name,u_rate)
+    print(allowance)
 
+    
+    allowances.append(allowance)
 
     new_allowance = {
         'Allowance id' : allowance.id,
@@ -31,12 +34,10 @@ while True :
         'Allowance rate ' : allowance.rate,
         
     }
-
-    
         
-
-    with open ("employee.json",'w') as file :
-            allowances.append(new_allowance)
+ 
+    with open ("allowance.json",'w') as file :
+            
             json.dump( new_allowance,file, indent = 4)
 
         

@@ -1,5 +1,3 @@
-
-
 from oop_prac import Employee
 import json
 

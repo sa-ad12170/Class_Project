@@ -38,6 +38,9 @@ class Position:
         self.department =department
         self.salary =salary
 
+    def __str__(self):
+        return f'Title : {self.title}\nDepartment :{self.department}\nSalary : {self.salary}'    
+
     def  roles(self):
         pass
     
@@ -130,17 +133,15 @@ class Allowance:
         self.name =name
         self.rate =rate
 
-    def fixed(self):
-        pass
+    def __str__(self):
+        return f'Payroll id :{self.payrollid}\nAllowance Id :{self.id}\nEmployee Id :{self.employmentid}\nAllowance Rate :{self.name}\nRate :{self.rate}'
 
-    def specific(self):
-        pass
 
 
 
 class Payroll:
-    def __init__(self,issuer):
-     self.issuer = issuer 
+    def __init__(self,payrollid,):
+     self.payrollid = payrollid 
      self.date = self.caculate_date()
      
     def caculate_date (self) :
@@ -149,7 +150,7 @@ class Payroll:
      return self.date 
     
     def __str__(self):
-        return f'Payroll has been issused by {self.issuer} on {self.date}'
+        return f'Payroll with ID {self.payrollid} has been issued on {self.date}'
     #NEED TO GET A LIST OF ALL EMPLOYESS PAID AND THEIR RESPECTIVE SALARIES SO THAT WE CAN GET THE TOTAL OF THE PAYROLL 
 
     
