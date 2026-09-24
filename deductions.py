@@ -12,7 +12,7 @@ try:
 
 except FileNotFoundError:
     print("File not found. Creating a new file.")
-    dedcutions= []
+    dedcutions = []
 
 
 while True :
@@ -36,7 +36,7 @@ while True :
         'salary' : deduction.salary,
         'Amount to be deducted' : deduction.compute_amount(),
         
-    }
+    } 
 
     with open ("deduction.json",'w') as file :
             dedcutions.append(new_dedecution)
