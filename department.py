@@ -1,6 +1,15 @@
-
-                         
 from oop_prac import Department
+
+
+#testing the above to be following departments to be based on 
+
+departments = {
+'dept001' : 'IT' , 
+'dept002': 'Sales'
+}
+
+with open('departments.json' , 'r') as shaya:
+    pass
 
 data = {}
 
