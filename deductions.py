@@ -12,7 +12,7 @@ try:
 
 except FileNotFoundError:
     print("File not found. Creating a new file.")
-    dedcutions = []
+    dedcutions= []
 
 
 while True :
