@@ -140,7 +140,7 @@ class Allowance:
 
 
 class Payroll:
-    def __init__(self,payrollid,):
+    def __init__(self,payrollid):
      self.payrollid = payrollid 
      self.date = self.caculate_date()
      
