@@ -9,9 +9,11 @@ class Department:
         return self.staff
 
     def remove_staff(self,employee_id):
-        for employee in self.staff :
-            self.staff.remove(employee)
-            return (f'Staff member has been removed ')
+        for employee in self.staff:
+            if employee['id'] == employee_id:
+                self.staff.remove(employee)
+                return 'Staff member has been removed'
+        return 'Staff member not found'
 
     def display_staff(self):
         print (f'Staff in {self.departmentname}:')
