@@ -85,6 +85,51 @@ class Employee:
         return self.__age 
     def get_age (self):
         return self.__age
+    #add an abstrsctmethod 
+    def compute_salary (self):
+        return self.__salary
+    
+#INHERITANCE  AND POLYMORPHISM 
+
+class Developer(Employee) : 
+    SALARY = 500000
+    BONUS1 = 100000
+    BONUS2 = 200000
+    BONUS3 = 300000
+    def __init__(self, id, firstname, lastname, dateofbirth, department, gender, status, contact, village, city, position,language , projects , ):
+        super().__init__(id, firstname, lastname, dateofbirth, department, gender, status, contact, village, city, position) 
+        self.language = language
+        self.projects = projects
+
+    def compute_salary(self):
+        if self.projects < 5 :
+            self.__salary = Developer.SALARY + Developer.BONUS1
+        elif self.projects  >= 5 and self.projects <= 10 :
+            self.__salary = Developer.SALARY + Developer.BONUS2
+        else :
+            self.__salary = Developer.SALARY + Developer.BONUS3   
+
+class Technician (Employee)   :
+    def __init__(self, id, firstname, lastname, dateofbirth, department, gender, status, contact, village, city, position,skills ,tasks ):
+        super().__init__(id, firstname, lastname, dateofbirth, department, gender, status, contact, village, city, position)
+        self.skills = skills 
+        self.tasks = tasks      
+
+    def compute_salary (self)   :
+        SALARY = 300000
+        BONUS1 = 50000
+        BONUS2 =100000
+        BONUS3 = 150000
+
+        if self.tasks < 5 :
+                    self.__salary = Developer.SALARY + Developer.BONUS1
+        elif self.tasks  >= 5 and self.tasks <= 10 :
+                    self.__salary = Developer.SALARY + Developer.BONUS2
+        else :
+                    self.__salary = Developer.SALARY + Developer.BONUS3 
+
+
+
 
 
 '''
