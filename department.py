@@ -23,6 +23,8 @@ def load_departments():
             department.staff = saved_department.get('Department staff', [])
             departments[department.deptid] = department
 
+#this is implelemted when the departments dictionary is empty it will execute the default and if you want to hard code it eraseS the json and then try to run again
+
     if not departments:
         departments = {
             'dept001': Department('dept001', 'IT'),
@@ -31,7 +33,7 @@ def load_departments():
 
     return departments
 
-
+#this is a one oline statment the brackets mean put the values in the brackets outcome comes first and then the loop follows
 def save_departments(departments):
     with open(DEPARTMENTS_FILE, 'w', encoding='utf-8') as file:
         json.dump(
@@ -48,7 +50,7 @@ def choose_department():
     department_list = list(departments.values())
     print('\nAvailable departments:')
     for number, department in enumerate(department_list, start=1):
-        print(f'{number}. {department.departmentname}')
+        print(f'{number}.{department.departmentname}')
 
     choice = input('Select a department number: ')
     if choice.isdigit() and 1 <= int(choice) <= len(department_list):
@@ -56,18 +58,6 @@ def choose_department():
 
     print('Invalid department selection')
     return None
-
-
-# departments = {}
-#number = int(input('how many departments do you want to add : '))
-# for i in range(number ):
-#     dept_id = input('Enter department id :')
-#     dept_name = input('Enter department name :')
-#     #no_of_staff = input('Enter no of staff :')
-
-#     department = Department(dept_id,dept_name)
-
-         
 
 while True : 
     print ('\t\tMENU\n1.Add staff\n2.Remove staff\n3.Display staff\n4.Count staff\n5.Exit ')
