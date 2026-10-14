@@ -67,7 +67,7 @@ class Employee:
         self.__address = self.set_address()#irrelevant
         self.gender =gender
         self.status =status
-        self.position = position#issue(should  not be none)
+        self.position = position.upper()#issue(should  not be none)
         self.__age = self.compute_age()
         self.__salary = 0
        #need to make method for position 
@@ -92,7 +92,7 @@ class Employee:
         return self.__salary
     
 #INHERITANCE  AND POLYMORPHISM 
-
+#whoever contributes remove this poster when the instances are created 
 class Developer(Employee) : 
     SALARY = 500000
     BONUS1 = 100000
@@ -112,23 +112,41 @@ class Developer(Employee) :
             self.__salary = Developer.SALARY + Developer.BONUS3   
 
 class Technician (Employee)   :
+    SALARY = 300000
+    BONUS1 = 50000
+    BONUS2 =100000
+    BONUS3 = 150000
     def __init__(self, id, firstname, lastname, dateofbirth, department, gender, status, contact, village, city, position,skills ,tasks ):
         super().__init__(id, firstname, lastname, dateofbirth, department, gender, status, contact, village, city, position)
         self.skills = skills 
         self.tasks = tasks      
 
     def compute_salary (self)   :
-        SALARY = 300000
-        BONUS1 = 50000
-        BONUS2 =100000
-        BONUS3 = 150000
-
+        
         if self.tasks < 5 :
                     self.__salary = Developer.SALARY + Developer.BONUS1
         elif self.tasks  >= 5 and self.tasks <= 10 :
                     self.__salary = Developer.SALARY + Developer.BONUS2
         else :
                     self.__salary = Developer.SALARY + Developer.BONUS3 
+
+
+
+class Admin (Employee):
+    def __init__(self, id, firstname, lastname, dateofbirth, department, gender, status, contact, village, city, position,no_of_people):
+        super().__init__(id, firstname, lastname, dateofbirth, department, gender, status, contact, village, city, position)
+        self.people = no_of_people
+
+    def compute_salary(self):
+        if self.position == 'CEO' :
+            self.__salary = 100000
+        elif  self.position == 'COO':
+            self.__salary = 20000000000
+
+        else:
+            self.__salary = 3000000 
+
+
 
 
 
