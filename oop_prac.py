@@ -1,3 +1,4 @@
+from abc import ABC , abstractmethod
 class Department:
     def __init__(self,deptid,name):
        self.deptid = deptid
@@ -37,40 +38,51 @@ class Department:
 class Position:
     def __init__(self,title,department,salary):
         self.title =title
-        self.department =department
-        self.salary =salary
+        self.department =department#composition
+        self.salary =salary#composition to salary scale
 
     def __str__(self):
         return f'Title : {self.title}\nDepartment :{self.department}\nSalary : {self.salary}'    
 
-    def  roles(self):
-        pass
-    
-    def assigned(self):
-        pass
-
     def status(self):
-        pass
+            pass#result should be vacant or occupied
+    
+
+   
 
 
 
 class Employee:
+    employee = 0
+
+
+
     def __init__(self,id,firstname,lastname,dateofbirth,department,gender,status,contact,village,city,position):
         self.id =id
         self.firstname =firstname
         self.lastname =lastname
         self.dateofbirth =dateofbirth
-        self.department =department
+        self.department =department#composition
         self.contact = contact
         self.village = village 
         self.city = city
         self.__address = self.set_address()#irrelevant
         self.gender =gender
-        self.status =status
-        self.position = position.upper()#issue(should  not be none)
+        self.status =status#fired or active
+        self.position = position.upper()#issue(should  not be none) and composition
         self.__age = self.compute_age()
-        self.__salary = 0
-       #need to make method for position 
+        self.__salary = 0 #composition
+       #need to make method for position
+       # 
+    @classmethod
+    def generate_id(cls):
+        al = "Emp"
+        cls.employee +=1 
+        return al + str(cls.employee) 
+
+    
+
+
 
     def set_address (self):
         self.__address = f'{self.village.upper()} in {self.city.upper()}'
@@ -93,7 +105,9 @@ class Employee:
     
 #INHERITANCE  AND POLYMORPHISM 
 #whoever contributes remove this poster when the instances are created 
+#self destruct not important
 class Developer(Employee) : 
+
     SALARY = 500000
     BONUS1 = 100000
     BONUS2 = 200000
@@ -156,29 +170,53 @@ class Admin (Employee):
 make a method status thatt combines the hired fired active and promoted 
 '''
     # make a childclass salary from employee
-class Salary : 
-    def __init__(self,employee_id,hoursworked,rateperhour):
-        self.employee_id = employee_id
-        self.hoursworked = hoursworked 
-        self.rateperhour = rateperhour
-        self.__salary =self.set_salary()
+# class SalaryScale : 
+#     def __init__(self,employee_id,hoursworked,rateperhour):
+#         self.employee_id = employee_id
+#         self.hoursworked = hoursworked 
+#         self.rateperhour = rateperhour
+#         self.__salary =self.set_salary()
 
-    def set_salary (self):
-        self.__salary = self.hoursworked  * self.rateperhour  
-        return self.__salary
+#     def set_salary (self):
+#         self.__salary = self.hoursworked  * self.rateperhour  
+#         return self.__salary
     
-    def get_salary (self):
-        return self.__salary     
+#     def get_salary (self):
+#         return self.__salary     
         
-#child class of employee 
+class SalaryScale:
+    def __init__(self,employeeid,position):
+        self.employeeid = employeeid#to be composed
+        self.position = position#to be composed
+        self.salary = 0
+
+        if self.position == "regular".lower().strip():
+            self.salary = 500000
+
+        elif self.position == "team_leader".lower().strip():
+            self.salary = 7000000
+
+        elif self.position == "department_head".lower().strip():
+            self.salary = 900000
+
+        elif self.position == "ceo".lower().strip():
+            self.salary = 2000000
+
+        elif self.position == "coo".lower().strip():
+                self.salary = 40000000
+
+        else:
+            print('position not available')
+
+
 class Deductions:
         def __init__(self,id,deductionname,deductionrate,payrollnumber,employeeid,salary):
             self.id =id
             self.deduction_name =deductionname
             self.deduction_rate =deductionrate
             self.payrollnumber =payrollnumber
-            self.employeeid =employeeid
-            self.salary = salary
+            self.employeeid =employeeid#compose
+            self.salary = salary#compose
             self.__amount = self.compute_amount()
 
         
@@ -194,7 +232,7 @@ class Allowance:
     def __init__(self,id,payrollid,employmentid,name,rate):
         self.id =id
         self.payrollid =payrollid
-        self.employmentid =employmentid
+        self.employmentid =employmentid#composition
         self.name =name
         self.rate =rate
 
@@ -223,13 +261,19 @@ class Payroll:
 
 #child class from employeeS
 #has a bug 
-class Payslip:
-    def __init__(self,id,employeename,totaldeductions,totalallowances,hoursworked):
+
+class Pay(ABC):
+    @abstractmethod
+    def Payments(self):
+        pass
+#above is what i have introduced
+
+class Payslip(Pay):
+    def __init__(self,id,employeename,totaldeductions,totalallowances):
         self.id =id
         self.employeename =employeename
-        self.totaldeductions =totaldeductions
-        self.totalallowances =totalallowances
-        self.hoursworked =hoursworked
+        self.totaldeductions =totaldeductions#compose from allowances
+        self.totalallowances =totalallowances#compose from allowances
         self.__gross = 0 
         self.__net = self.compute_net()
         
