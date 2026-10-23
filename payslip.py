@@ -3,7 +3,7 @@
 from oop_prac import Payslip
 import json
 try:
-    with open ('payslip.json','r') as file :
+    with open ('payslips.json','r') as file :
      payslips = json.load(file)
 
 
@@ -20,9 +20,13 @@ while True :
     salary = int(input('Enter salary : '))
 
     payslip = Payslip (u_payslipid,u_employeename,u_totaldeductions,u_totalallowances,u_hoursworked)
-    print(payslip)
-    payslip.set_gross(salary) 
+
+    payslip.set_gross(salary)
+    #print(payslip)
+     
     payslip.compute_net()
+
+    payslip.Payments()
     
 
     new_payslip = {
@@ -30,7 +34,7 @@ while True :
         'Employee name ' : payslip.employeename,
         'Total deductions  ' : payslip.totaldeductions,
         'Total allowances ' : payslip.totalallowances,
-        'hours worked' : payslip.hoursworked,
+        'hours worked' : payslip.hours_worked,
         'Gross' : payslip.get_gross (),
         'Net' : payslip.get_net(),
         

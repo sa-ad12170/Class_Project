@@ -263,23 +263,25 @@ class Payroll:
 #has a bug 
 
 class Pay(ABC):
+    
     @abstractmethod
     def Payments(self):
         pass
 #above is what i have introduced
 
 class Payslip(Pay):
-    def __init__(self,id,employeename,totaldeductions,totalallowances):
+    def __init__(self,id,employeename,totaldeductions,totalallowances,hours_worked):
         self.id =id
         self.employeename =employeename
         self.totaldeductions =totaldeductions#compose from allowances
         self.totalallowances =totalallowances#compose from allowances
+        self.hours_worked = hours_worked
         self.__gross = 0 
         self.__net = self.compute_net()
         
 
-    def __str__(self):
-        return f'Payslip id -------->\t{self.id}\nTotal Deductions\t: {self.totaldeductions}\nTotal Allowances\t: {self.totalallowances}\nHours Worked\t: {self.hoursworked}'
+    # def __str__(self):
+    #     return f'Payslip id -------->\t{self.id}\nTotal Deductions\t: {self.totaldeductions}\nTotal Allowances\t: {self.totalallowances}\nHours Worked\t: {self.hours_worked}'
 
     def set_gross(self,salary)  :
         self.__gross = salary  + self.totalallowances
@@ -290,10 +292,15 @@ class Payslip(Pay):
 
 
     def compute_net(self):
-        self.__net = self.__gross - self.totaldeductions
+        self.__net = self.get_gross() - self.totaldeductions
         return self.__net 
+    
     def get_net(self):
         return self.__net
+
+    def Payments(self):
+        print(f"Payment details for {self.employeename}")
+        print(f"Net salary: {self.get_net()}")
 
 
         
