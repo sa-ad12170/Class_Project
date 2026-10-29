@@ -5,8 +5,9 @@ class Department:
         d_id = "Dept"
         cls.deptid +=1 
         return d_id + str(cls.deptid)
-    def __init__(self,deptid,name):
-       self.deptid = deptid
+    
+    def __init__(self,name):
+       self.deptid = self.generate_id() 
        self.departmentname =name
        self.staff = []
 
@@ -37,7 +38,8 @@ class Department:
             'Department name':self.departmentname,
             'Department staff':self.staff,
         } 
-     
+    def __str__(self):
+        return f'DEPARTMENT : {self.departmentname} '    
 
 
 #child class from employee parent class 
@@ -62,8 +64,15 @@ class Position:
 
 
 class Employee:
-    def __init__(self,id,firstname,lastname,dateofbirth,department,gender,status,contact,village,city,position):
-        self.id =id
+    emp = 0 
+    @classmethod
+    def generate_id(cls):
+        d_id = "EMP"
+        cls.emp +=1 
+        return d_id + str(cls.emp)
+    
+    def __init__(self,firstname,lastname,dateofbirth,department,gender,status,contact,village,city,position):
+        self.empid = self.generate_id()
         self.firstname =firstname
         self.lastname =lastname
         self.dateofbirth =dateofbirth
@@ -102,10 +111,10 @@ make a method status thatt combines the hired fired active and promoted
     # make a childclass salary from employee
 class Salary : 
     def __init__(self,employee_id,hoursworked,rateperhour):
-        self.employee_id = employee_id
+        self.employee_id = employee_id# apply composition
         self.hoursworked = hoursworked 
         self.rateperhour = rateperhour
-        self.__salary =self.set_salary()
+        self.__salary = self.set_salary()
 
     def set_salary (self):
         self.__salary = self.hoursworked  * self.rateperhour  
@@ -115,9 +124,15 @@ class Salary :
         return self.__salary     
         
 #child class of employee 
-class Deductions:
-        def __init__(self,id,deductionname,deductionrate,payrollnumber,employeeid,salary):
-            self.id =id
+class Deduction:
+        deduction_id= 0
+        @classmethod
+        def generate_id(cls):
+            d_id = "Ded"
+            cls.deduction_id +=1 
+            return d_id + str(cls.deduction_id)
+        def __init__(self,deductionname,deductionrate,payrollnumber,employeeid ,salary):
+            self.id =self.generate_id()
             self.deduction_name =deductionname
             self.deduction_rate =deductionrate
             self.payrollnumber =payrollnumber
@@ -135,22 +150,39 @@ class Deductions:
 
 
 class Allowance:
-    def __init__(self,id,payrollid,employmentid,name,rate):
-        self.id =id
+    all_id= 0
+    @classmethod
+    def generate_id(cls):
+        a_id = "ALl"
+        cls.all_id +=1 
+        return a_id + str(cls.all_id)
+    def __init__(self,payrollid,employmentid,name,rate,salary):
+        self.id =self.generate_id()
         self.payrollid =payrollid
         self.employmentid =employmentid
-        self.name =name
-        self.rate =rate
+        self.name = name
+        self.rate = rate
+        self.salary = salary
+        self.amount =self.compute_amount()
 
     def __str__(self):
         return f'Payroll id :{self.payrollid}\nAllowance Id :{self.id}\nEmployee Id :{self.employmentid}\nAllowance Rate :{self.name}\nRate :{self.rate}'
+    def compute_amount(self):        
+            self.amount = (self.rate/100) * (self.salary)
+            return self.amount
 
 
 
 
 class Payroll:
-    def __init__(self,payrollid):
-     self.payrollid = payrollid 
+    pay_id= 0
+    @classmethod
+    def generate_id(cls):
+        pa_id = "PAY"
+        cls.pay_id +=1 
+        return pa_id + str(cls.pay_id)
+    def __init__(self):
+     self.payrollid = self.generate_id()
      self.date = self.caculate_date()
      
     def caculate_date (self) :
@@ -168,8 +200,15 @@ class Payroll:
 #child class from employeeS
 #has a bug 
 class Payslip:
-    def __init__(self,id,employeename,totaldeductions,totalallowances,hoursworked):
-        self.id =id
+    pays_id= 0
+    @classmethod
+    def generate_id(cls):
+        pa_id = "PAY"
+        cls.pays_id +=1 
+        return pa_id + str(cls.pays_id)
+    
+    def __init__(self,employeename,totaldeductions,totalallowances,hoursworked):
+        self.id =self.generate_id()
         self.employeename =employeename
         self.totaldeductions =totaldeductions
         self.totalallowances =totalallowances
@@ -190,7 +229,7 @@ class Payslip:
 
 
     def compute_net(self):
-        self.__net = self.__gross - self.totaldeductions
+        self.__net = self.__gross -  self.totaldeductions
         return self.__net 
     def get_net(self):
         return self.__net
