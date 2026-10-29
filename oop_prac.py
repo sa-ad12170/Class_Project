@@ -1,4 +1,10 @@
 class Department:
+    deptid = 0
+    @classmethod
+    def generate_id(cls):
+        d_id = "Dept"
+        cls.deptid +=1 
+        return d_id + str(cls.deptid)
     def __init__(self,deptid,name):
        self.deptid = deptid
        self.departmentname =name
@@ -31,6 +37,7 @@ class Department:
             'Department name':self.departmentname,
             'Department staff':self.staff,
         } 
+     
 
 
 #child class from employee parent class 
