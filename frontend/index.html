@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Class project employee and payroll dashboard">
+    <title>Payflow | Payroll Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#dashboard" data-view-link="dashboard" aria-label="Payflow dashboard">
+          <span class="brand-mark">PF</span>
+          <span>
+            <strong>Payflow</strong>
+            <small>Class Project</small>
+          </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-item is-active" type="button" data-view-link="dashboard">
+            <span class="nav-icon" aria-hidden="true">⌂</span>
+            Dashboard
+          </button>
+          <button class="nav-item" type="button" data-view-link="employees">
+            <span class="nav-icon" aria-hidden="true">◎</span>
+            Employees
+          </button>
+          <button class="nav-item" type="button" data-view-link="payslips">
+            <span class="nav-icon" aria-hidden="true">▤</span>
+            Payslips
+          </button>
+        </nav>
+
+        <div class="sidebar-note">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Local storage</strong>
+            <small>JSON data is connected</small>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Payroll workspace</p>
+            <h1 id="page-title">Dashboard</h1>
+          </div>
+          <div class="topbar-actions">
+            <span class="date-chip" id="current-date"></span>
+            <button class="primary-button compact" type="button" data-view-link="employees" data-focus="employee-id">
+              <span aria-hidden="true">＋</span>
+              Add employee
+            </button>
+          </div>
+        </header>
+
+        <section class="view is-active" id="dashboard-view" data-view="dashboard">
+          <div class="welcome-card">
+            <div>
+              <p class="eyebrow light">Good day</p>
+              <h2>Your payroll overview</h2>
+              <p>Manage people, review payroll activity, and prepare payslips from one simple workspace.</p>
+            </div>
+            <button class="light-button" type="button" data-view-link="payslips">Create a payslip</button>
+          </div>
+
+          <div class="stats-grid" aria-label="Payroll statistics">
+            <article class="stat-card">
+              <span class="stat-icon blue" aria-hidden="true">◎</span>
+              <div>
+                <p>Employees</p>
+                <strong id="stat-employees">0</strong>
+              </div>
+              <small>Registered staff</small>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon gold" aria-hidden="true">◇</span>
+              <div>
+                <p>Departments</p>
+                <strong id="stat-departments">0</strong>
+              </div>
+              <small>Active teams</small>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon violet" aria-hidden="true">▤</span>
+              <div>
+                <p>Payslips</p>
+                <strong id="stat-payslips">0</strong>
+              </div>
+              <small>Generated records</small>
+            </article>
+            <article class="stat-card">
+              <span class="stat-icon green" aria-hidden="true">U</span>
+              <div>
+                <p>Total net pay</p>
+                <strong id="stat-total-net">UGX 0</strong>
+              </div>
+              <small>Across saved payslips</small>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel wide-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Latest activity</p>
+                  <h3>Recent payslips</h3>
+                </div>
+                <button class="text-button" type="button" data-view-link="payslips">View calculator</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Employee</th>
+                      <th>Payslip ID</th>
+                      <th>Gross</th>
+                      <th>Net pay</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-payslips-body"></tbody>
+                </table>
+              </div>
+              <div class="empty-state" id="recent-payslips-empty">
+                <span>▤</span>
+                <strong>No payslips yet</strong>
+                <p>Create the first payslip to see payroll activity here.</p>
+              </div>
+            </article>
+
+            <article class="panel department-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Organisation</p>
+                  <h3>Departments</h3>
+                </div>
+              </div>
+              <div class="department-list" id="department-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="employees-view" data-view="employees">
+          <div class="section-intro">
+            <div>
+              <p class="eyebrow">People directory</p>
+              <h2>Employees</h2>
+              <p>Add staff records and keep essential employment information in one place.</p>
+            </div>
+            <span class="record-count" id="employee-count">0 employees</span>
+          </div>
+
+          <div class="form-layout">
+            <article class="panel form-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">New record</p>
+                  <h3>Add an employee</h3>
+                </div>
+              </div>
+              <form id="employee-form">
+                <div class="form-grid two-columns">
+                  <label>
+                    Employee ID
+                    <input id="employee-id" name="employee_id" required placeholder="EMP001">
+                  </label>
+                  <label>
+                    Contact
+                    <input name="contact" required placeholder="0700 000 000">
+                  </label>
+                  <label>
+                    First name
+                    <input name="first_name" required placeholder="Ada">
+                  </label>
+                  <label>
+                    Last name
+                    <input name="last_name" required placeholder="Lovelace">
+                  </label>
+                  <label>
+                    Birth year
+                    <input name="birth_year" type="number" min="1900" required placeholder="2000">
+                  </label>
+                  <label>
+                    Gender
+                    <select name="gender" required>
+                      <option value="">Select gender</option>
+                      <option>Female</option>
+                      <option>Male</option>
+                      <option>Other</option>
+                    </select>
+                  </label>
+                  <label>
+                    Department
+                    <input name="department" required placeholder="IT">
+                  </label>
+                  <label>
+                    Position
+                    <input name="position" required placeholder="Developer">
+                  </label>
+                  <label>
+                    Employment status
+                    <select name="employment_status" required>
+                      <option value="Active">Active</option>
+                      <option value="On leave">On leave</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </label>
+                  <label>
+                    Village
+                    <input name="village" required placeholder="Ntinda">
+                  </label>
+                  <label class="full-width">
+                    City
+                    <input name="city" required placeholder="Kampala">
+                  </label>
+                </div>
+                <button class="primary-button full-button" type="submit">Save employee</button>
+              </form>
+            </article>
+
+            <article class="panel records-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Staff records</p>
+                  <h3>Employee directory</h3>
+                </div>
+              </div>
+              <div class="employee-list" id="employee-list"></div>
+              <div class="empty-state" id="employees-empty">
+                <span>◎</span>
+                <strong>No employees registered</strong>
+                <p>Use the form to add your first employee.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="payslips-view" data-view="payslips">
+          <div class="section-intro">
+            <div>
+              <p class="eyebrow">Payroll tools</p>
+              <h2>Payslip calculator</h2>
+              <p>Calculate gross pay, deductions, and net salary before saving a payslip.</p>
+            </div>
+          </div>
+
+          <div class="calculator-layout">
+            <article class="panel form-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Calculation details</p>
+                  <h3>Prepare payslip</h3>
+                </div>
+              </div>
+              <form id="payslip-form">
+                <div class="form-grid two-columns">
+                  <label>
+                    Payslip ID
+                    <input name="payslip_id" required placeholder="PS001">
+                  </label>
+                  <label>
+                    Payroll ID <span class="optional">optional</span>
+                    <input name="payroll_id" placeholder="PAY001">
+                  </label>
+                  <label class="full-width">
+                    Employee
+                    <select name="employee_id" id="payslip-employee" required>
+                      <option value="">Select an employee</option>
+                    </select>
+                  </label>
+                  <label>
+                    Base salary (UGX)
+                    <input name="base_salary" type="number" min="0" step="100" required placeholder="1000000">
+                  </label>
+                  <label>
+                    Hours worked
+                    <input name="hours_worked" type="number" min="0" step="0.5" required placeholder="160">
+                  </label>
+                  <label>
+                    Allowance rate (%)
+                    <input name="allowance_rate" type="number" min="0" max="100" step="0.1" value="0" required>
+                  </label>
+                  <label>
+                    Deduction rate (%)
+                    <input name="deduction_rate" type="number" min="0" max="100" step="0.1" value="0" required>
+                  </label>
+                </div>
+                <div class="button-row">
+                  <button class="secondary-button" type="button" id="calculate-button">Calculate only</button>
+                  <button class="primary-button" type="submit">Calculate &amp; save</button>
+                </div>
+              </form>
+            </article>
+
+            <aside class="result-card" aria-live="polite">
+              <div class="result-header">
+                <span>Pay summary</span>
+                <small id="result-status">Waiting for calculation</small>
+              </div>
+              <div class="result-total">
+                <small>Net salary</small>
+                <strong id="result-net">UGX 0</strong>
+              </div>
+              <dl class="result-breakdown">
+                <div><dt>Base salary</dt><dd id="result-base">UGX 0</dd></div>
+                <div><dt>Allowance</dt><dd class="positive" id="result-allowance">+ UGX 0</dd></div>
+                <div><dt>Gross pay</dt><dd id="result-gross">UGX 0</dd></div>
+                <div><dt>Deductions</dt><dd class="negative" id="result-deduction">− UGX 0</dd></div>
+              </dl>
+              <p class="result-note">Calculations are saved only when you choose “Calculate &amp; save”.</p>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

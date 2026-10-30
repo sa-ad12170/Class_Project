@@ -1,4 +1,5 @@
 __pycache__
+.venv/
 *.json
 data/*.tmp
 allowance.json
@@ -7,4 +8,3 @@ allowance.json
 department.json
 deductions.json
 payroll.json
-
