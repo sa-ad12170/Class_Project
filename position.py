@@ -1,5 +1,5 @@
 from oop_prac import Position
-import json
+from storage import DuplicateRecordError, StorageError, append_record
 
 while True :
     u_title = input ("Enter title : ")
@@ -12,21 +12,20 @@ while True :
     #print (position)
 
     new_position = {
-            'Title' : position.title,
-            'Department' :  position.department,
-            'Salary' : position.salary,   
-        }
-
-    with open ('position.json','r') as file :
-            positions = json.load(file) 
-    
-    positions.append(new_position)
-    with open ('position.json','w') as file :
-        json.dump(positions,file,indent=4)
+        'title': position.title,
+        'department': position.department,
+        'salary': position.salary,
+        'status': position.status(),
+    }
+    try:
+        append_record('positions', new_position, ('title', 'department'))
+        print('Record saved successfully')
+    except (DuplicateRecordError, StorageError) as error:
+        print(error)
 
     add_position = input ('Do you want to add another position (y/n) : ')    
     
     if  add_position == 'y' :
             continue 
     else :
-            break     
+            break

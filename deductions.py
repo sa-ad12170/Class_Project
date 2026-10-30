@@ -2,17 +2,7 @@
 # need to make the rate automatic 
 
 from oop_prac import Deductions
-import json
-#DeptID,Name,Number_of_staff
-
-try:
-    with open ('deduction.json','r') as file :
-            dedcutions = json.load(file)
-
-
-except FileNotFoundError:
-    print("File not found. Creating a new file.")
-    dedcutions= []
+from storage import DuplicateRecordError, StorageError, append_record
 
 
 while True :
@@ -28,19 +18,19 @@ while True :
     deduction = Deductions(u_deductionid,u_decname,u_rate,u_payrollno,u_employeeid,u_salary)    
 
     new_dedecution = {
-        'deduction_id' : deduction.id,
-        'deduction_name': deduction.deduction_name,
-        'deduction_rate':deduction.deduction_rate,
-        'Payroll number ' : deduction.payrollnumber,
-        'Employee_id' : deduction.employeeid,
-        'salary' : deduction.salary,
-        'Amount to be deducted' : deduction.compute_amount(),
-        
-    } 
-
-    with open ("deduction.json",'w') as file :
-            dedcutions.append(new_dedecution)
-            json.dump( dedcutions,file, indent = 4)
+        'deduction_id': deduction.id,
+        'name': deduction.deduction_name,
+        'rate': deduction.deduction_rate,
+        'payroll_id': deduction.payrollnumber,
+        'employee_id': deduction.employeeid,
+        'salary': deduction.salary,
+        'amount': deduction.compute_amount(),
+    }
+    try:
+        append_record('deductions', new_dedecution, 'deduction_id')
+        print('Record saved successfully')
+    except (DuplicateRecordError, StorageError) as error:
+        print(error)
     
    
     add_depat = input ('Do you want to add another deduction (y/n) :')    
@@ -48,4 +38,4 @@ while True :
     if  add_depat == 'y' :
         continue 
     else :
-        break 
+        break

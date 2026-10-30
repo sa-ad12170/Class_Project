@@ -1,21 +1,5 @@
 from oop_prac import Employee
-import json
-
-
-try:
-    with open ('employee.json','r') as file :
-            employees = json.load(file)
-            print(type(employees))
-            print(employees)
- 
-
-except FileNotFoundError:
-    print("File not found. Creating a new file.")
-    employees= []
-
-except json.decoder.JSONDecodeError:
-     print('File not yet created. Creating a new file')
-     employees = []
+from storage import DuplicateRecordError, StorageError, append_record
   
 
 while True :
@@ -41,26 +25,23 @@ while True :
 
 
     new_employee = {
-        'employeeid' : employee.id,
-        'First name ' :  employee.firstname,
-        'Last name ' : employee.lastname,
-        'Birth year' : employee.dateofbirth,
-        'Department' : employee.department,
-        'Gender' : employee.gender,
-        'Status' : employee.status,
-        'Position' : employee.position,
-        'Contact' : employee.contact,
-        'Address' : employee.get_address(),
-        'Age'     :employee.get_age(),
-        
+        'employee_id': employee.id,
+        'first_name': employee.firstname,
+        'last_name': employee.lastname,
+        'birth_year': employee.dateofbirth,
+        'department': employee.department,
+        'gender': employee.gender,
+        'status': employee.status,
+        'position': employee.position,
+        'contact': employee.contact,
+        'address': employee.get_address(),
+        'age': employee.get_age(),
     }
-
-    
-        
-
-    with open ("employee.json",'w') as file :
-            employees.append(new_employee)
-            json.dump( employees,file, indent = 4)
+    try:
+        append_record('employees', new_employee, 'employee_id')
+        print('Record saved successfully')
+    except (DuplicateRecordError, StorageError) as error:
+        print(error)
 
         
     add_employee = input ('Do you want to add employee  (y/n) :')    
@@ -68,4 +49,4 @@ while True :
     if  add_employee == 'y' :
         continue 
     else :
-        break 
+        break

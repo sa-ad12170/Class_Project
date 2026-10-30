@@ -1,22 +1,5 @@
 from oop_prac import Allowance
-import json
-
-
-try:
-    with open ('allowance.json','r') as file :
-        allowances= json.load(file)
-
-        print(type(allowances))
-        print(allowances)
-
-
-except FileNotFoundError:
-     print("File not found. Creating a new file.")
-     allowances= []
-
-except json.decoder.JSONDecodeError:
-     print('File not yet created. Creating a new file')
-     allowances = []
+from storage import DuplicateRecordError, StorageError, append_record
     
 
 while True :
@@ -34,19 +17,17 @@ while True :
     
 
     new_allowance = {
-        'Allowance id' : allowance.id,
-        'Payroll number  ' :  allowance.payrollid,
-        'Employment id ' : allowance.employmentid,
-        'Allowance name ' : allowance.name,
-        'Allowance rate ' : allowance.rate,
-        
+        'allowance_id': allowance.id,
+        'payroll_id': allowance.payrollid,
+        'employee_id': allowance.employmentid,
+        'name': allowance.name,
+        'rate': allowance.rate,
     }
-
-    allowances.append(new_allowance)
-        
- 
-    with open ("allowance.json",'w') as file :
-            json.dump(allowances,file, indent = 4)
+    try:
+        append_record('allowances', new_allowance, 'allowance_id')
+        print('Record saved successfully')
+    except (DuplicateRecordError, StorageError) as error:
+        print(error)
 
 
 
@@ -57,4 +38,4 @@ while True :
     if  add_allowance == 'y' :
         continue 
     else :
-        break 
+        break

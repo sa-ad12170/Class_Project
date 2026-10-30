@@ -1,10 +1,10 @@
 __pycache__
 *.json
+data/*.tmp
 allowance.json
 employee.json
 allowance.json
 department.json
 deductions.json
 payroll.json
-
 

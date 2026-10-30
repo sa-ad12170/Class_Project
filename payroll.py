@@ -1,14 +1,5 @@
 from oop_prac import Payroll
-import json 
-
-try:
-    with open ('payroll.json','r') as file :
-     payrolls = json.load(file)
-
-
-except FileNotFoundError:
-    print("File not found. Creating a new file.")
-    payrolls = []
+from storage import DuplicateRecordError, StorageError, append_record
     
 #datetime is not JSON serializable        
 while True:
@@ -18,20 +9,18 @@ while True:
     print(payroll)
 
     new_payroll = {
-                'Payslip id' : payroll.payrollid,
-                'Date'  : payroll.caculate_date().isoformat()
-            }
-        
-    payrolls.append(new_payroll)
-        
-    with open ("payslips.json",'w') as file :
-                json.dump(new_payroll,file, indent = 2)
-            
-                    
+        'payroll_id': payroll.payrollid,
+        'issued_at': payroll.date.isoformat(),
+    }
+    try:
+        append_record('payrolls', new_payroll, 'payroll_id')
+        print('Record saved successfully')
+    except (DuplicateRecordError, StorageError) as error:
+        print(error)
+
     add_payslip = input ('Do you want to add another payslip (y/n) : ')    
             
     if  add_payslip == 'y' :
         continue 
     else :
         break
-                    
