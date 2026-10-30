@@ -1,31 +1,27 @@
+from cli_helpers import ask_yes_no, read_number, read_text, save_record
 from oop_prac import Salary
-from storage import DuplicateRecordError, StorageError, append_record
 
-while True:
-    u_employee_id = input ('Enter employee id : ')
-    u_hoursworked = int(input ('Enter hoursworked :'))
-    u_rate =int( input ('Enter rate :'))
 
-    salary = Salary(u_employee_id,u_hoursworked,u_rate)
-    paidsalary = salary.get_salary()
-    print(f'SALARY : {paidsalary}')
+def run_salary_workflow():
+    while True:
+        salary = Salary(
+            read_text('Enter employee ID: '),
+            read_number('Enter hours worked: '),
+            read_number('Enter hourly rate: '),
+        )
+        print(f'Salary: {salary.get_salary()}')
 
-    new_salary = {
-        'employee_id': salary.employee_id,
-        'hours_worked': salary.hoursworked,
-        'rate_per_hour': salary.rateperhour,
-        'salary': salary.get_salary(),
-    }
-    try:
-        append_record('salaries', new_salary, 'employee_id')
-        print('Record saved successfully')
-    except (DuplicateRecordError, StorageError) as error:
-        print(error)
-        
-    
-    add_salary = input ('Do you want to add another employees salary  (y/n) :')    
+        record = {
+            'employee_id': salary.employee_id,
+            'hours_worked': salary.hoursworked,
+            'rate_per_hour': salary.rateperhour,
+            'salary': salary.get_salary(),
+        }
+        save_record('salaries', record, 'employee_id')
 
-    if  add_salary == 'y' :
-            continue 
-    else :
+        if not ask_yes_no('Do you want to add another salary (y/n)? '):
             break
+
+
+if __name__ == '__main__':
+    run_salary_workflow()

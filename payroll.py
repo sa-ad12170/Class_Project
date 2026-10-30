@@ -1,26 +1,21 @@
+from cli_helpers import ask_yes_no, read_text, save_record
 from oop_prac import Payroll
-from storage import DuplicateRecordError, StorageError, append_record
-    
-#datetime is not JSON serializable        
-while True:
-    payroll_id = input ('Enter payroll_id  : ')
 
-    payroll = Payroll(payroll_id)
-    print(payroll)
 
-    new_payroll = {
-        'payroll_id': payroll.payrollid,
-        'issued_at': payroll.date.isoformat(),
-    }
-    try:
-        append_record('payrolls', new_payroll, 'payroll_id')
-        print('Record saved successfully')
-    except (DuplicateRecordError, StorageError) as error:
-        print(error)
+def run_payroll_workflow():
+    while True:
+        payroll = Payroll(read_text('Enter payroll ID: '))
+        print(payroll)
 
-    add_payslip = input ('Do you want to add another payslip (y/n) : ')    
-            
-    if  add_payslip == 'y' :
-        continue 
-    else :
-        break
+        record = {
+            'payroll_id': payroll.payrollid,
+            'issued_at': payroll.date.isoformat(),
+        }
+        save_record('payrolls', record, 'payroll_id')
+
+        if not ask_yes_no('Do you want to add another payroll (y/n)? '):
+            break
+
+
+if __name__ == '__main__':
+    run_payroll_workflow()

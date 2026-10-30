@@ -1,12 +1,11 @@
+from cli_helpers import read_text
 from oop_prac import Department
-from storage import load_records, save_records
+from storage import StorageError, load_records, save_records
 
 
 def load_departments():
-    saved_departments = load_records('departments')
-
     departments = {}
-    for saved_department in saved_departments:
+    for saved_department in load_records('departments'):
         department = Department(
             saved_department['department_id'],
             saved_department['name'],
@@ -14,17 +13,14 @@ def load_departments():
         department.staff = saved_department.get('staff', [])
         departments[department.deptid] = department
 
-#this is implelemted when the departments dictionary is empty it will execute the default and if you want to hard code it eraseS the json and then try to run again
-
     if not departments:
         departments = {
             'dept001': Department('dept001', 'IT'),
             'dept002': Department('dept002', 'Sales'),
         }
-
     return departments
 
-#this is a one oline statment the brackets mean put the values in the brackets outcome comes first and then the loop follows
+
 def save_departments(departments):
     save_records(
         'departments',
@@ -32,66 +28,76 @@ def save_departments(departments):
     )
 
 
-departments = load_departments()
-
-
-def choose_department():
+def choose_department(departments):
     department_list = list(departments.values())
     print('\nAvailable departments:')
     for number, department in enumerate(department_list, start=1):
-        print(f'{number}.{department.departmentname}')
+        print(f'{number}. {department.departmentname}')
 
-    choice = input('Select a department number: ')
+    choice = input('Select a department number: ').strip()
     if choice.isdigit() and 1 <= int(choice) <= len(department_list):
         return department_list[int(choice) - 1]
 
     print('Invalid department selection')
     return None
 
+
 def run_department_menu():
+    try:
+        departments = load_departments()
+    except StorageError as error:
+        print(error)
+        return
+
     while True:
-        print('\t\tMENU\n1.Add staff\n2.Remove staff\n3.Display staff\n4.Count staff\n5.Exit')
-        choice = input('Enter your choice : ')
+        print('\nDEPARTMENT MENU')
+        print('1. Add staff')
+        print('2. Remove staff')
+        print('3. Display staff')
+        print('4. Count staff')
+        print('5. Return to main menu')
+        choice = input('Enter your choice: ').strip()
 
         if choice == '1':
-            department = choose_department()
-            if department is not None:
-                name = input('Enter staff name : ')
-                employeeid = input('Enter employee id : ')
-                position = input('Enter position : ')
-                employee = {
-                    'employee_id': employeeid,
-                    'name': name,
-                    'position': position,
-                }
-                try:
-                    department.add_staff(employee)
-                    save_departments(departments)
-                    print('Staff member added successfully')
-                except ValueError as error:
-                    print(error)
-            else:
-                print('Department not found')
+            department = choose_department(departments)
+            if department is None:
+                continue
+
+            employee = {
+                'employee_id': read_text('Enter employee ID: '),
+                'name': read_text('Enter staff name: '),
+                'position': read_text('Enter position: '),
+            }
+            try:
+                department.add_staff(employee)
+                save_departments(departments)
+                print('Staff member added successfully')
+            except (ValueError, StorageError) as error:
+                print(error)
 
         elif choice == '2':
-            dept_id = input('Enter department id: ')
-            if dept_id in departments:
-                employeeid = input('Enter staff id to remove: ')
-                result = departments[dept_id].remove_staff(employeeid)
+            department_id = read_text('Enter department ID: ')
+            if department_id not in departments:
+                print('Department not found')
+                continue
+
+            employee_id = read_text('Enter staff ID to remove: ')
+            result = departments[department_id].remove_staff(employee_id)
+            try:
                 save_departments(departments)
                 print(result)
-            else:
-                print('Department not found')
+            except StorageError as error:
+                print(error)
 
         elif choice == '3':
-            dept_id = input('Enter department id: ')
-            if dept_id in departments:
-                departments[dept_id].display_staff()
+            department_id = read_text('Enter department ID: ')
+            if department_id in departments:
+                departments[department_id].display_staff()
             else:
                 print('Department not found')
 
         elif choice == '4':
-            department_id = input('Enter department id: ')
+            department_id = read_text('Enter department ID: ')
             if department_id in departments:
                 number = departments[department_id].get_no_of_staff()
                 print(f'Number of staff in department: {number}')
@@ -99,9 +105,12 @@ def run_department_menu():
                 print('Department not found')
 
         elif choice == '5':
-            save_departments(departments)
-            print('Exited')
-            break
+            try:
+                save_departments(departments)
+                print('Returning to main menu')
+            except StorageError as error:
+                print(error)
+            return
 
         else:
             print('Invalid option')
@@ -109,4 +118,4 @@ def run_department_menu():
 
 if __name__ == '__main__':
     run_department_menu()
-   
+

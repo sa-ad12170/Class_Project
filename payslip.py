@@ -1,45 +1,34 @@
-#id,employeename,totaldeductions,totalallowances,gross,hoursworked
-
+from cli_helpers import ask_yes_no, read_number, read_text, save_record
 from oop_prac import Payslip
-from storage import DuplicateRecordError, StorageError, append_record
-   
-while True :
-    u_payslipid = input ('Enter Payslip id : ')
-    u_employeename = input ('Enter employee name : ')
-    u_totaldeductions = int(input ('Enter  totaldeductions : '))
-    u_totalallowances= int(input ('Enter totalallowances  : '))
-    u_hoursworked = int(input ('Enter hoursworked : '))
-    salary = int(input('Enter salary : '))
 
-    payslip = Payslip (u_payslipid,u_employeename,u_totaldeductions,u_totalallowances,u_hoursworked)
 
-    payslip.set_gross(salary)
-    #print(payslip)
-     
-    payslip.compute_net()
+def run_payslip_workflow():
+    while True:
+        payslip = Payslip(
+            read_text('Enter payslip ID: '),
+            read_text('Enter employee name: '),
+            read_number('Enter total deductions: '),
+            read_number('Enter total allowances: '),
+            read_number('Enter hours worked: '),
+        )
+        payslip.set_gross(read_number('Enter salary: '))
+        print(payslip)
+        payslip.Payments()
 
-    payslip.Payments()
-    
+        record = {
+            'payslip_id': payslip.id,
+            'employee_name': payslip.employeename,
+            'total_deductions': payslip.totaldeductions,
+            'total_allowances': payslip.totalallowances,
+            'hours_worked': payslip.hours_worked,
+            'gross': payslip.get_gross(),
+            'net': payslip.get_net(),
+        }
+        save_record('payslips', record, 'payslip_id')
 
-    new_payslip = {
-        'payslip_id': payslip.id,
-        'employee_name': payslip.employeename,
-        'total_deductions': payslip.totaldeductions,
-        'total_allowances': payslip.totalallowances,
-        'hours_worked': payslip.hours_worked,
-        'gross': payslip.get_gross(),
-        'net': payslip.get_net(),
-    }
-    try:
-        append_record('payslips', new_payslip, 'payslip_id')
-        print('Record saved successfully')
-    except (DuplicateRecordError, StorageError) as error:
-        print(error)
-    
-            
-    add_payslip = input ('Do you want to add another payslip (y/n) : ')    
-    
-    if  add_payslip == 'y' :
-            continue 
-    else :
+        if not ask_yes_no('Do you want to add another payslip (y/n)? '):
             break
+
+
+if __name__ == '__main__':
+    run_payslip_workflow()

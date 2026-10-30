@@ -1,41 +1,30 @@
+from cli_helpers import ask_yes_no, read_number, read_text, save_record
 from oop_prac import Allowance
-from storage import DuplicateRecordError, StorageError, append_record
-    
-
-while True :
-#user input    
-    u_id = input('Enter allowance id : ')
-    u_payrollid =input('Enter payrollid : ')
-    u_employmentid =input('Enter employmentid : ')
-    u_name =input('Enter  allowance name : ')
-    u_rate =input('Enter allowance rate : ')
-
-    allowance  = Allowance(u_id,u_payrollid,u_employmentid,u_name,u_rate)
-    print(allowance)
-
-    
-    
-
-    new_allowance = {
-        'allowance_id': allowance.id,
-        'payroll_id': allowance.payrollid,
-        'employee_id': allowance.employmentid,
-        'name': allowance.name,
-        'rate': allowance.rate,
-    }
-    try:
-        append_record('allowances', new_allowance, 'allowance_id')
-        print('Record saved successfully')
-    except (DuplicateRecordError, StorageError) as error:
-        print(error)
 
 
+def run_allowance_workflow():
+    while True:
+        allowance = Allowance(
+            read_text('Enter allowance ID: '),
+            read_text('Enter payroll ID: '),
+            read_text('Enter employee ID: '),
+            read_text('Enter allowance name: '),
+            read_number('Enter allowance rate: ', maximum=100),
+        )
+        print(allowance)
+
+        record = {
+            'allowance_id': allowance.id,
+            'payroll_id': allowance.payrollid,
+            'employee_id': allowance.employmentid,
+            'name': allowance.name,
+            'rate': allowance.rate,
+        }
+        save_record('allowances', record, 'allowance_id')
+
+        if not ask_yes_no('Do you want to add another allowance (y/n)? '):
+            break
 
 
-        
-    add_allowance = input ('Do you want to add another allowance (y/n) : ')    
-
-    if  add_allowance == 'y' :
-        continue 
-    else :
-        break
+if __name__ == '__main__':
+    run_allowance_workflow()

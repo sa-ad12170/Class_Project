@@ -1,41 +1,32 @@
-
-# need to make the rate automatic 
-
+from cli_helpers import ask_yes_no, read_number, read_text, save_record
 from oop_prac import Deductions
-from storage import DuplicateRecordError, StorageError, append_record
 
 
-while True :
-#user input    
-    u_deductionid = input ('Enter deduction id :')
-    u_decname = input ('Enter decution name  :')
-    u_rate = int(input ('Enter rate of deduction  :'))
-    u_payrollno = input ('Enter pay roll number  :')
-    u_employeeid = input ('Enter employee id  :')
-    u_salary = int(input('Enter employees salary : '))
-    
+def run_deduction_workflow():
+    while True:
+        deduction = Deductions(
+            read_text('Enter deduction ID: '),
+            read_text('Enter deduction name: '),
+            read_number('Enter deduction rate: ', maximum=100),
+            read_text('Enter payroll ID: '),
+            read_text('Enter employee ID: '),
+            read_number('Enter employee salary: '),
+        )
 
-    deduction = Deductions(u_deductionid,u_decname,u_rate,u_payrollno,u_employeeid,u_salary)    
+        record = {
+            'deduction_id': deduction.id,
+            'name': deduction.deduction_name,
+            'rate': deduction.deduction_rate,
+            'payroll_id': deduction.payrollnumber,
+            'employee_id': deduction.employeeid,
+            'salary': deduction.salary,
+            'amount': deduction.compute_amount(),
+        }
+        save_record('deductions', record, 'deduction_id')
 
-    new_dedecution = {
-        'deduction_id': deduction.id,
-        'name': deduction.deduction_name,
-        'rate': deduction.deduction_rate,
-        'payroll_id': deduction.payrollnumber,
-        'employee_id': deduction.employeeid,
-        'salary': deduction.salary,
-        'amount': deduction.compute_amount(),
-    }
-    try:
-        append_record('deductions', new_dedecution, 'deduction_id')
-        print('Record saved successfully')
-    except (DuplicateRecordError, StorageError) as error:
-        print(error)
-    
-   
-    add_depat = input ('Do you want to add another deduction (y/n) :')    
+        if not ask_yes_no('Do you want to add another deduction (y/n)? '):
+            break
 
-    if  add_depat == 'y' :
-        continue 
-    else :
-        break
+
+if __name__ == '__main__':
+    run_deduction_workflow()
