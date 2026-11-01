@@ -110,11 +110,12 @@ make a method status thatt combines the hired fired active and promoted
 '''
     # make a childclass salary from employee
 class Salary : 
-    def __init__(self,employee_id,hoursworked,rateperhour):
+    def __init__(self,employee_id,employeename,hoursworked,rateperhour):
         self.employee_id = employee_id# apply composition
+        self.employeename = employeename
         self.hoursworked = hoursworked 
         self.rateperhour = rateperhour
-        self.__salary = self.set_salary()
+        self.salaryamount = self.set_salary()# changed salary from private to public 
 
     def set_salary (self):
         self.__salary = self.hoursworked  * self.rateperhour  
@@ -138,7 +139,7 @@ class Deduction:
             self.payrollnumber =payrollnumber
             self.employeeid =employeeid
             self.salary = salary
-            self.__amount = self.compute_amount()
+            self.amount = self.compute_amount()#made it public 
 
         
 #different rates for different deductions

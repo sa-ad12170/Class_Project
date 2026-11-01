@@ -52,6 +52,7 @@ while True :
         else :
             break 
 
+
 #EMPLOYEE  
 try:
         with open ('main.json','r') as file :
@@ -133,15 +134,17 @@ except FileNotFoundError:
 
 
 u_employee_id = Employee.generate_id()
+
 u_hoursworked = int(input ('Enter hoursworked : '))
 u_rate =int( input ('Enter rate :'))
 
-salary = Salary(u_employee_id,u_hoursworked,u_rate)
+salary = Salary(u_employee_id,employee.firstname,u_hoursworked,u_rate) # employee composition 
 paidsalary = salary.get_salary()
 print(f'SALARY : {paidsalary}')
 
 new_employee = {
         'Employee_id' : salary.employee_id,
+        "Employee name  ":salary.employeename,
         'hours_worked': salary.hoursworked,
         'Hour_rate':salary.rateperhour,
         'Salary ' : salary.get_salary(),
@@ -150,6 +153,7 @@ new_employee = {
 with open ("main.json",'w') as file :
             mainjson.append(new_employee)
             json.dump(mainjson,file, indent = 4)
+           
 ##PAYROLL     
 
 try:
@@ -209,14 +213,14 @@ except json.decoder.JSONDecodeError:
 while True :
     #user input    
         u_id = Allowance.generate_id ()
-        u_payrollid =Payroll.generate_id() 
-        u_employmentid =Employee.generate_id()
+       # u_payrollid =Payroll.generate_id() 
+        #u_employmentid =Employee.generate_id()
         u_name =input('Enter  allowance name : ')
         u_rate =int(input('Enter allowance rate : '))
-        u_salary = int(input("Enter salary : "))
+        #u_salary = int(input("Enter salary : "))
 
-        allowance  = Allowance(u_payrollid,u_employmentid,u_name,u_rate,u_salary)
-        print(allowance)
+        allowance  = Allowance(payroll.payrollid,employee.empid ,u_name,u_rate,salary.salaryamount) # implemented composition 
+        #print(allowance)
 
         
         
@@ -266,19 +270,19 @@ while True :
         u_deductionid = Deduction.generate_id
         u_decname = input ('Enter decution name  :')
         u_rate = int(input ('Enter rate of deduction  :'))
-        u_payrollno = Payroll.generate_id
-        u_employeeid = Employee.generate_id
-        u_salary = int(input("Enter salary : "))
+        #u_payrollno = Payroll.generate_id
+        #u_employeeid = Employee.generate_id
+        #u_salary = int(input("Enter salary : "))added composition
         
 
-        deduction = Deduction(u_decname,u_rate,u_payrollno,u_employeeid,u_salary)    
+        deduction = Deduction(u_decname,u_rate,payroll.payrollid,employee.empid,salary.salaryamount)    
 
         new_dedecution = {
             'deduction_id' : deduction.id,
             'deduction_name': deduction.deduction_name,
             'deduction_rate':deduction.deduction_rate,
-            'Payroll number ' : Payroll.generate_id(),
-            'Employee_id' : Employee.generate_id(),
+            'Payroll number ' : deduction.payrollnumber,
+            'Employee_id' : deduction.employeeid,
             'salary' : deduction.salary,
             'Amount to be deducted' : deduction.compute_amount(),
             
@@ -309,14 +313,14 @@ except FileNotFoundError:
     
 
 u_payslipid =  Payslip.generate_id() 
-u_employeename = input ('Enter employee name  : ')
-u_totaldeductions = int(input ('Enter Total deductions   : '))
-u_totalallowances= int(input ('Enter Total allowamces  : '))
-u_hoursworked = int (input ('Enter Total hours worked  : '))
-salary =  int (input ('Enter Total salary : '))
-payslip = Payslip (u_employeename,u_totaldeductions,u_totalallowances,u_hoursworked)
+#u_employeename = input ('Enter employee name  : ')
+#u_totaldeductions = int(input ('Enter Total deductions   : '))
+#u_totalallowances= int(input ('Enter Total allowamces  : '))
+#u_hoursworked = int (input ('Enter Total hours worked  : '))
+#salary =  int (input ('Enter Total salary : '))
+payslip = Payslip (employee.firstname,deduction.amount,allowance.amount,salary.hoursworked)#applied composition
 print(payslip)
-payslip.set_gross(salary) 
+payslip.set_gross(salary.salaryamount) 
 payslip.compute_net()
 
 
@@ -337,7 +341,7 @@ with open ("mainjson.json",'w') as file :
         json.dump( mainjson,file, indent = 4)
     
         
-        
+#NEDD TO MOVE POSITIOON OBJECT        
 #title \position 
    
 u_title = input ("Enter title : ")
