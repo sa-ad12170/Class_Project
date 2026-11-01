@@ -8,8 +8,7 @@ try:
         with open ('main.json','r') as file :
             mainjson= json.load(file)
 
-            print(type(mainjson))
-            print(mainjson)
+            
 
 
 except FileNotFoundError:
@@ -57,7 +56,7 @@ while True :
 try:
         with open ('main.json','r') as file :
                 mainjson = json.load(file)
-                print(type(mainjson))
+                #print(type(mainjson))
                 print(mainjson)
     
 
@@ -141,7 +140,7 @@ salary = Salary(u_employee_id,u_hoursworked,u_rate)
 paidsalary = salary.get_salary()
 print(f'SALARY : {paidsalary}')
 
-new_dedecution = {
+new_employee = {
         'Employee_id' : salary.employee_id,
         'hours_worked': salary.hoursworked,
         'Hour_rate':salary.rateperhour,
@@ -149,7 +148,7 @@ new_dedecution = {
         
     }
 with open ("main.json",'w') as file :
-            mainjson.append(new_dedecution)
+            mainjson.append(new_employee)
             json.dump(mainjson,file, indent = 4)
 ##PAYROLL     
 
@@ -193,8 +192,8 @@ try:
         with open ('main.json','r') as file :
             mainjson= json.load(file)
 
-            print(type(mainjson))
-            print(mainjson)
+            #print(type(mainjson))
+            #print(mainjson)
 
 
 except FileNotFoundError:
@@ -214,7 +213,7 @@ while True :
         u_employmentid =Employee.generate_id()
         u_name =input('Enter  allowance name : ')
         u_rate =int(input('Enter allowance rate : '))
-        u_salary = Salary.get_salary
+        u_salary = int(input("Enter salary : "))
 
         allowance  = Allowance(u_payrollid,u_employmentid,u_name,u_rate,u_salary)
         print(allowance)
@@ -228,13 +227,14 @@ while True :
             'Employment id ' : allowance.employmentid,
             'Allowance name ' : allowance.name,
             'Allowance rate ' : allowance.rate,
+            'Allowance amount' : allowance.compute_amount()
             
         }
 
         mainjson.append(new_allowance)
             
     
-        with open ("allowance.json",'w') as file :
+        with open ("main.json",'w') as file :
                 json.dump(mainjson,file, indent = 4)
 
          
@@ -256,8 +256,11 @@ try:
 except FileNotFoundError:
         print("File not found. Creating a new file.")
         mainjson= []
+except json.decoder.JSONDecodeError:
+        print('File not yet created. Creating a new file')
+        mainjson = []        
 
-#DEDUCTIONN
+
 while True :
     #user input    
         u_deductionid = Deduction.generate_id
@@ -265,7 +268,7 @@ while True :
         u_rate = int(input ('Enter rate of deduction  :'))
         u_payrollno = Payroll.generate_id
         u_employeeid = Employee.generate_id
-        u_salary = Employee.generate_id()
+        u_salary = int(input("Enter salary : "))
         
 
         deduction = Deduction(u_decname,u_rate,u_payrollno,u_employeeid,u_salary)    
@@ -306,11 +309,11 @@ except FileNotFoundError:
     
 
 u_payslipid =  Payslip.generate_id() 
-u_employeename = input ('hours : ')
-u_totaldeductions = int(input ('hours : '))
-u_totalallowances= int(input ('hours : '))
-u_hoursworked = int (input ('hours : '))
-salary =  int (input ('hours : '))
+u_employeename = input ('Enter employee name  : ')
+u_totaldeductions = int(input ('Enter Total deductions   : '))
+u_totalallowances= int(input ('Enter Total allowamces  : '))
+u_hoursworked = int (input ('Enter Total hours worked  : '))
+salary =  int (input ('Enter Total salary : '))
 payslip = Payslip (u_employeename,u_totaldeductions,u_totalallowances,u_hoursworked)
 print(payslip)
 payslip.set_gross(salary) 

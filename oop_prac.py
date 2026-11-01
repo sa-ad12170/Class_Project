@@ -163,12 +163,13 @@ class Allowance:
         self.name = name
         self.rate = rate
         self.salary = salary
-        self.amount =self.compute_amount()
+        self.amount = self.compute_amount()
 
     def __str__(self):
         return f'Payroll id :{self.payrollid}\nAllowance Id :{self.id}\nEmployee Id :{self.employmentid}\nAllowance Rate :{self.name}\nRate :{self.rate}'
     def compute_amount(self):        
-            self.amount = (self.rate/100) * (self.salary)
+            self.amountrate = (self.rate/100)
+            self.amount = self.amountrate * self.salary 
             return self.amount
 
 
