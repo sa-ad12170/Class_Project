@@ -70,57 +70,57 @@ except json.decoder.JSONDecodeError:
         mainjson= []
     
 
-while True :
+#while True :
     #user input    
-        u_employeeid = Employee.generate_id () 
-        u_fname = input ('Enter first name  : ')
-        u_last = input ('Enter last name   : ')
-        u_dateofbirth = int(input('Enter birth year : '))
-        u_department = input('Enter department : ')
-        u_gender = input('Enter gender : ')
-        u_status = input('Enter status : ')
-        u_contact = input('Enter contact : ')
-        u_position = input('Enter position : ')
-        u_village = input('Enter village: ')
-        u_city = input('Enter city : ')
-        
-        
-        
-        
-
-        employee = Employee(u_fname,u_last ,u_dateofbirth,u_department,u_gender ,u_status,u_contact ,u_village,u_city,u_position) 
-        
+u_employeeid = Employee.generate_id () 
+u_fname = input ('Enter first name  : ')
+u_last = input ('Enter last name   : ')
+u_dateofbirth = int(input('Enter birth year : '))
+u_department = input('Enter department : ')
+u_gender = input('Enter gender : ')
+u_status = input('Enter status : ')
+u_contact = input('Enter contact : ')
+u_position = input('Enter position : ')
+u_village = input('Enter village: ')
+u_city = input('Enter city : ')
 
 
-        new_employee = {
-            'employeeid' : employee.empid,
-            'First name ' :  employee.firstname,
-            'Last name ' : employee.lastname,
-            'Birth year' : employee.dateofbirth,
-            'Department' : employee.department,
-            'Gender' : employee.gender,
-            'Status' : employee.status,
-            'Position' : employee.position,
-            'Contact' : employee.contact,
-            'Address' : employee.get_address(),
-            'Age'     :employee.get_age(),
+
+
+
+employee = Employee(u_fname,u_last ,u_dateofbirth,u_department,u_gender ,u_status,u_contact ,u_village,u_city,u_position) 
+
+
+
+new_employee = {
+        'employeeid' : employee.empid,
+        'First name ' :  employee.firstname,
+        'Last name ' : employee.lastname,
+        'Birth year' : employee.dateofbirth,
+        'Department' : employee.department,
+        'Gender' : employee.gender,
+        'Status' : employee.status,
+        'Position' : employee.position,
+        'Contact' : employee.contact,
+        'Address' : employee.get_address(),
+        'Age'     :employee.get_age(),
+        
+}
+
+
+        
+
+with open ("main.json",'w') as file :
+        mainjson.append(new_employee)
+        json.dump( mainjson,file, indent = 4)
+
             
-        }
+        #add_employee = input ('Do you want to add employee  (y/n) :')    
 
-        
-            
-
-        with open ("main.json",'w') as file :
-                mainjson.append(new_employee)
-                json.dump( mainjson,file, indent = 4)
-
-            
-        add_employee = input ('Do you want to add employee  (y/n) :')    
-
-        if  add_employee == 'y' :
-            continue 
-        else :
-            break   
+       # if  add_employee == 'y' :
+           # continue 
+        #else :
+          #  break   
 
 #SALARY 
 try:
@@ -133,12 +133,12 @@ except FileNotFoundError:
         mainjson = []
 
 
-u_employee_id = Employee.generate_id()
+#u_employee_id = Employee.generate_id()
 
 u_hoursworked = int(input ('Enter hoursworked : '))
 u_rate =int( input ('Enter rate :'))
 
-salary = Salary(u_employee_id,employee.firstname,u_hoursworked,u_rate) # employee composition 
+salary = Salary(employee.empid,employee.firstname,u_hoursworked,u_rate) # employee composition 
 paidsalary = salary.get_salary()
 print(f'SALARY : {paidsalary}')
 
@@ -166,29 +166,29 @@ except FileNotFoundError:
         payrolls = []
         
     #datetime is not JSON serializable        
-while True:
-        payroll_id = Payroll.generate_id() 
+#while True:
+payroll_id = Payroll.generate_id() 
 
-        payroll = Payroll()
-        print(payroll)
+payroll = Payroll()
+print(payroll)
 
-        new_payroll = {
-                    'Payslip id' : payroll.payrollid,
-                    'Date'  : payroll.caculate_date().isoformat()
-                }
-            
-        payrolls.append(new_payroll)
-            
-        with open ("payslips.json",'w') as file :
-                    json.dump(new_payroll,file, indent = 2)
-                
+new_payroll = {
+                'Payslip id' : payroll.payrollid,
+                'Date'  : payroll.caculate_date().isoformat()
+        }
+        
+payrolls.append(new_payroll)
+        
+with open ("payslips.json",'w') as file :
+                json.dump(new_payroll,file, indent = 2)
+        
                         
-        add_payroll = input ('Do you want to add another payroll (y/n) : ')    
+        #add_payroll = input ('Do you want to add another payroll (y/n) : ')    
                 
-        if  add_payroll == 'y' :
-            continue 
-        else :
-            break                 
+        #if  add_payroll == 'y' :
+            #continue 
+        #else :
+            #break                 
        
 #ALLOWANCE 
 
@@ -210,44 +210,44 @@ except json.decoder.JSONDecodeError:
 
        
 
-while True :
+#while True :
     #user input    
-        u_id = Allowance.generate_id ()
-       # u_payrollid =Payroll.generate_id() 
-        #u_employmentid =Employee.generate_id()
-        u_name =input('Enter  allowance name : ')
-        u_rate =int(input('Enter allowance rate : '))
-        #u_salary = int(input("Enter salary : "))
+u_id = Allowance.generate_id ()
+# u_payrollid =Payroll.generate_id() 
+#u_employmentid =Employee.generate_id()
+u_name =input('Enter  allowance name : ')
+u_rate =int(input('Enter allowance rate : '))
+#u_salary = int(input("Enter salary : "))
 
-        allowance  = Allowance(payroll.payrollid,employee.empid ,u_name,u_rate,salary.salaryamount) # implemented composition 
-        #print(allowance)
+allowance  = Allowance(payroll.payrollid,employee.empid ,u_name,u_rate,salary.salaryamount) # implemented composition 
+#print(allowance)
 
+
+
+
+new_allowance = {
+        'Allowance id' : allowance.id,
+        'Payroll number  ' :  allowance.payrollid,
+        'Employment id ' : allowance.employmentid,
+        'Allowance name ' : allowance.name,
+        'Allowance rate ' : allowance.rate,
+        'Allowance amount' : allowance.compute_amount()
         
-        
+}
 
-        new_allowance = {
-            'Allowance id' : allowance.id,
-            'Payroll number  ' :  allowance.payrollid,
-            'Employment id ' : allowance.employmentid,
-            'Allowance name ' : allowance.name,
-            'Allowance rate ' : allowance.rate,
-            'Allowance amount' : allowance.compute_amount()
-            
-        }
-
-        mainjson.append(new_allowance)
+mainjson.append(new_allowance)
             
     
-        with open ("main.json",'w') as file :
+with open ("main.json",'w') as file :
                 json.dump(mainjson,file, indent = 4)
 
          
-        add_allowance = input ('Do you want to add another allowance (y/n) : ')    
+        #add_allowance = input ('Do you want to add another allowance (y/n) : ')    
 
-        if  add_allowance == 'y' :
-            continue 
-        else :
-            break 
+        #if  add_allowance == 'y' :
+            #continue 
+        #else :
+            #break 
 
   #DEDUCTIONS 
     #DeptID,Name,Number_of_staff
@@ -265,40 +265,40 @@ except json.decoder.JSONDecodeError:
         mainjson = []        
 
 
-while True :
+#while True :
     #user input    
-        u_deductionid = Deduction.generate_id
-        u_decname = input ('Enter decution name  :')
-        u_rate = int(input ('Enter rate of deduction  :'))
-        #u_payrollno = Payroll.generate_id
-        #u_employeeid = Employee.generate_id
-        #u_salary = int(input("Enter salary : "))added composition
+u_deductionid = Deduction.generate_id
+u_decname = input ('Enter decution name  :')
+u_rate = int(input ('Enter rate of deduction  :'))
+#u_payrollno = Payroll.generate_id
+#u_employeeid = Employee.generate_id
+#u_salary = int(input("Enter salary : "))added composition
+
+
+deduction = Deduction(u_decname,u_rate,payroll.payrollid,employee.empid,salary.salaryamount)    
+
+new_dedecution = {
+        'deduction_id' : deduction.id,
+        'deduction_name': deduction.deduction_name,
+        'deduction_rate':deduction.deduction_rate,
+        'Payroll number ' : deduction.payrollnumber,
+        'Employee_id' : deduction.employeeid,
+        'salary' : deduction.salary,
+        'Amount to be deducted' : deduction.compute_amount(),
         
+} 
 
-        deduction = Deduction(u_decname,u_rate,payroll.payrollid,employee.empid,salary.salaryamount)    
-
-        new_dedecution = {
-            'deduction_id' : deduction.id,
-            'deduction_name': deduction.deduction_name,
-            'deduction_rate':deduction.deduction_rate,
-            'Payroll number ' : deduction.payrollnumber,
-            'Employee_id' : deduction.employeeid,
-            'salary' : deduction.salary,
-            'Amount to be deducted' : deduction.compute_amount(),
-            
-        } 
-
-        with open ("main.json",'w') as file :
+with open ("main.json",'w') as file :
                 mainjson.append(new_dedecution)
                 json.dump( mainjson,file, indent = 4)
         
     
-        add_ded = input ('Do you want to add another deduction (y/n) :')    
+        #add_ded = input ('Do you want to add another deduction (y/n) :')    
 
-        if  add_ded == 'y' :
-            continue 
-        else :
-            break          
+        #if  add_ded == 'y' :
+            #continue 
+        #else :
+            #break          
      
        
               
