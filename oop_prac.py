@@ -1,68 +1,3 @@
-class Department:
-    deptid = 0
-    @classmethod
-    def generate_id(cls):
-        d_id = "Dept"
-        cls.deptid +=1 
-        return d_id + str(cls.deptid)
-    
-    def __init__(self,name):
-       self.deptid = self.generate_id() 
-       self.departmentname =name
-       self.staff = []
-
-    def add_staff(self,employee):
-        self.staff.append (employee)
-        return self.staff
-
-    def remove_staff(self,employee_id):
-        for employee in self.staff:
-            if employee['id'] == employee_id:
-                self.staff.remove(employee)
-                return 'Staff member has been removed'
-        return 'Staff member not found'
-
-    def display_staff(self):
-        print (f'Staff in {self.departmentname}:')
-        if len(self.staff) == 0 :
-            print ('No staff in this department ')
-        for employee in self.staff :
-            print(f"ID : {employee['id']}\nName : {employee['name']}\nPosition:{employee['position']}")
-
-    def get_no_of_staff(self)  :
-        return len(self.staff) 
-    #converting the class into  a json 
-    def to_dict (self )    :
-        return {
-            'Department id':self.deptid,
-            'Department name':self.departmentname,
-            'Department staff':self.staff,
-        } 
-    def __str__(self):
-        return f'DEPARTMENT : {self.departmentname} '    
-
-
-#child class from employee parent class 
-class Position:
-    def __init__(self,title,department,salary):
-        self.title =title
-        self.department =department
-        self.salary =salary
-
-    def __str__(self):
-        return f'Title : {self.title}\nDepartment :{self.department}\nSalary : {self.salary}'    
-
-    def  roles(self):
-        pass
-    
-    def assigned(self):
-        pass
-
-    def status(self):
-        pass
-
-
-
 class Employee:
     emp = 0 
     @classmethod
@@ -103,6 +38,79 @@ class Employee:
         return self.__age 
     def get_age (self):
         return self.__age
+
+
+
+class Department:
+    deptid = 0
+    @classmethod
+    def generate_id(cls):
+        d_id = "Dept"
+        cls.deptid +=1 
+        return d_id + str(cls.deptid)
+    
+    def __init__(self,name):
+       self.deptid = self.generate_id() 
+       self.departmentname =name
+       self.staff = []
+
+    def add_staff(self,employee):
+        self.staff.append (employee)
+        #return self.staff
+
+    def remove_staff(self,employee_id):
+        for employee in self.staff:
+            if employee['id'] == employee_id:
+                self.staff.remove(employee)
+                return 'Staff member has been removed'
+        return 'Staff member not found'
+
+    def display_staff(self):#composition
+        output = ""
+        for employee in self.staff:
+            output += f"-->{employee}\n"
+            return output 
+
+        #print (f'Staff in {self.departmentname}:')
+         #if len(self.staff) == 0 :
+          #   print ('No staff in this department ')
+         #for employee in self.staff :
+             #print(f"ID : {employee['id']}\nName : {employee['name']}\nPosition:{employee['position']}")
+
+    def get_no_of_staff(self)  :
+        return len(self.staff) 
+    #converting the class into  a json 
+    def to_dict (self )    :
+        return {
+            'Department id':self.deptid,
+            'Department name':self.departmentname,
+            'Department staff':self.staff,
+        } 
+    def __str__(self):
+        return f'DEPARTMENT : {self.departmentname} '    
+
+
+#child class from employee parent class 
+class Position:
+    def __init__(self,title,department,salary):
+        self.title =title
+        self.department =department
+        self.salary =salary
+
+    def __str__(self):
+        return f'Title : {self.title}\nDepartment :{self.department}\nSalary : {self.salary}'    
+
+    def  roles(self):
+        pass
+    
+    def assigned(self):
+        pass
+
+    def status(self):
+        pass
+
+
+
 
 
 '''
