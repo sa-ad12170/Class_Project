@@ -173,6 +173,7 @@ class Allowance:
         self.rate = rate
         self.salary = salary
         self.amount = self.compute_amount()
+        self.allowances = []
 
     def __str__(self):
         return f'Payroll id :{self.payrollid}\nAllowance Id :{self.id}\nEmployee Id :{self.employmentid}\nAllowance Rate :{self.name}\nRate :{self.rate}'
@@ -180,6 +181,8 @@ class Allowance:
             self.amountrate = (self.rate/100)
             self.amount = self.amountrate * self.salary 
             return self.amount
+    def add_allowance(self,allowance):
+        self.allowances.append(allowance) 
 
 
 

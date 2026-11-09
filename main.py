@@ -192,28 +192,28 @@ except json.decoder.JSONDecodeError:
         mainjson = []
 
 while True :       
-        allowancelist =[]
+       
         
         u_id = Allowance.generate_id ()
-
         u_name =input('Enter  allowance name : ')
         u_rate =int(input('Enter allowance rate : '))
-
-
         allowance  = Allowance(payroll.payrollid,employee.empid ,u_name,u_rate,salary.salaryamount) # implemented composition 
+        
+ 
      
-             
         new_allowance = {
         'Allowance id' : allowance.id,
         'Payroll number  ' :  allowance.payrollid,
         'Employment id ' : allowance.employmentid,
         'Allowance name ' : allowance.name,
         'Allowance rate ' : allowance.rate,
-        'Allowance amount' :allowance.compute_amount()
-
-        }
+        'Allowance amount' :allowance.compute_amount(),
+       
+       }
 
         mainjson.append(new_allowance)
+        allowance_list  = allowance.add_allowance(allowance.amount)
+        
  
         with open ("main.json",'w') as file :
                 json.dump(mainjson,file, indent = 4)
@@ -226,7 +226,7 @@ while True :
                 continue 
         else :
                 break   
-print (allowancelist)             
+print (allowance_list)             
 
 #DEDUCTION         
 try:
