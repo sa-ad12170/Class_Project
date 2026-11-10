@@ -1,339 +1,170 @@
-from oop_prac import Allowance,Deduction,Salary,Payroll,Payslip,Position,Employee,Department 
 import json
-#print ("\tOPTIONS1.ALLOWANCE\n2.DEDUCTIONS\n3.SALARY\n4.PAYROLL\n5.PAYSLIP\n6.POSITION\n7.EMPLOYEE\n8.DEPARTMENT")
 
-#EMPLOYEE  
+from oop_prac import Allowance, Deduction, Department, Employee, Payroll, Payslip, Salary
+
+
+DATA_FILE = "main.json"
+
+# Keep all saved records under these three top-level keys.
 try:
-        with open ('main.json','r') as file :
-                mainjson = json.load(file)
-                #print(type(mainjson))
-                print(mainjson)
-    
+    with open(DATA_FILE, "r", encoding="utf-8") as file:
+        data = json.load(file)
+except (FileNotFoundError, json.JSONDecodeError):
+    data = {}
 
-except FileNotFoundError:
-        print("File not found. Creating a new file.")
-        mainjson= []
+if not isinstance(data, dict):
+    data = {}
 
-except json.decoder.JSONDecodeError:
-        print('File not yet created. Creating a new file')
-        mainjson= []
-    
-
-#while True :
-    #user input    
-u_employeeid = Employee.generate_id () 
-u_fname = input ('Enter first name  : ')
-u_last = input ('Enter last name   : ')
-u_dateofbirth = int(input('Enter birth year : '))
-u_department = input('Enter department : ')
-u_gender = input('Enter gender : ')
-u_status = input('Enter status : ')
-u_contact = input('Enter contact : ')
-u_position = input('Enter position : ')
-u_village = input('Enter village: ')
-u_city = input('Enter city : ')
+data.setdefault("departments", [])
+data.setdefault("allowances", [])
+data.setdefault("payrolls", [])
 
 
+# Collect employee and department details.
+first_name = input("Enter first name: ")
+last_name = input("Enter last name: ")
+birth_year = int(input("Enter birth year: "))
+department_name = input("Enter department: ")
+gender = input("Enter gender: ")
+status = input("Enter status: ")
+contact = input("Enter contact: ")
+position = input("Enter position: ")
+village = input("Enter village: ")
+city = input("Enter city: ")
 
+employee = Employee(
+    first_name,
+    last_name,
+    birth_year,
+    department_name,
+    gender,
+    status,
+    contact,
+    village,
+    city,
+    position,
+)
 
-
-employee = Employee(u_fname,u_last ,u_dateofbirth,u_department,u_gender ,u_status,u_contact ,u_village,u_city,u_position) 
-
-
-
-new_employee = {
-        'employeeid' : employee.empid,
-        'First name ' :  employee.firstname,
-        'Last name ' : employee.lastname,
-        'Birth year' : employee.dateofbirth,
-        'Department' : employee.department,
-        'Gender' : employee.gender,
-        'Status' : employee.status,
-        'Position' : employee.position,
-        'Contact' : employee.contact,
-        'Address' : employee.get_address(),
-        'Age'     :employee.get_age(),
-        
+employee_record = {
+    "id": employee.empid,
+    "first_name": employee.firstname,
+    "last_name": employee.lastname,
+    "birth_year": employee.dateofbirth,
+    "gender": employee.gender,
+    "status": employee.status,
+    "position": employee.position,
+    "contact": employee.contact,
+    "address": employee.get_address(),
+    "age": employee.get_age(),
 }
 
+# Find this department by name, or create it with an empty staff list.
+department = None
+for saved_department in data["departments"]:
+    if saved_department["name"].lower() == department_name.lower():
+        department = saved_department
+        break
 
-        
-
-with open ("main.json",'w') as file :
-        mainjson.append(new_employee)
-        json.dump( mainjson,file, indent = 4)
-
-#DEPARTMENT 
-
-try:
-        with open ('main.json','r') as file :
-            mainjson= json.load(file)
-
-            
-
-
-except FileNotFoundError:
-        print("File not found. Creating a new file.")
-        mainjson= []
-
-except json.decoder.JSONDecodeError:
-        print('File not yet created. Creating a new file')
-        mainjson = []
-        
-
-while True :
-    #user input    
-        u_id = Department.generate_id ()
-        dept_name =input('Enter deptartment name : ')
-        
-        department  = Department(dept_name)
-        print(department)
-
-        
-        
-
-        new_department  = {
-            'Department id' : department.deptid,
-            'Department name  ' : department.departmentname
-            
-            
-        }
-
-        mainjson.append(new_department)
-        department.add_staff(employee) 
-        department.display_staff()
-        
-
-        with open ("main.json",'w') as file :
-                json.dump(mainjson,file, indent = 4)
-
-
-         
-        add_department = input ('Do you want to add another department (y/n) : ')    
-
-        if  add_department  == 'y' :
-            continue 
-        else :
-            break         
-
-            
-       
-#SALARY 
-try:
-        with open ('main.json','r') as file :
-                mainjson= json.load(file)
-
-
-except FileNotFoundError:
-        print("File not found. Creating a new file.")
-        mainjson = []
-
-
-u_hoursworked = int(input ('Enter hoursworked : '))
-u_rate =int( input ('Enter rate :'))
-
-salary = Salary(employee.empid,employee.firstname,u_hoursworked,u_rate) # employee composition 
-paidsalary = salary.get_salary()
-print(f'SALARY : {paidsalary}')
-
-new_employee = {
-        'Employee_id' : salary.employee_id,
-        "Employee name  ":salary.employeename,
-        'hours_worked': salary.hoursworked,
-        'Hour_rate':salary.rateperhour,
-        'Salary ' : salary.get_salary(),
-        
+if department is None:
+    department = {
+        "id": Department.generate_id(),
+        "name": department_name,
+        "staff": [],
     }
-with open ("main.json",'w') as file :
-            mainjson.append(new_employee)
-            json.dump(mainjson,file, indent = 4)
-           
-##PAYROLL     
+    data["departments"].append(department)
 
-try:
-        with open ('payroll.json','r') as file :
-         payrolls = json.load(file)
+department["staff"].append(employee_record)
 
 
-except FileNotFoundError:
-        print("File not found. Creating a new file.")
-        payrolls = []
-        
-  
-payroll_id = Payroll.generate_id() 
+# Collect salary details and create one payroll record.
+hours_worked = int(input("Enter hours worked: "))
+rate_per_hour = int(input("Enter rate per hour: "))
+salary = Salary(employee.empid, employee.firstname, hours_worked, rate_per_hour)
 
 payroll = Payroll()
-print(payroll)
-
-new_payroll = {
-                'Payslip id' : payroll.payrollid,
-                'Date'  : payroll.caculate_date().isoformat()
-        }
-        
-payrolls.append(new_payroll)
-        
-with open ("payslips.json",'w') as file :
-                json.dump(new_payroll,file, indent = 2)
-        
-                                       
-       
-#ALLOWANCE 
-
-try:
-        with open ('main.json','r') as file :
-            mainjson= json.load(file)
-           
-except FileNotFoundError:
-        print("File not found. Creating a new file.")
-        mainjson= []
-
-except json.decoder.JSONDecodeError:
-        print('File not yet created. Creating a new file')
-        mainjson = []
-
-allowance_list = []
-while True :       
-       
-        
-        u_id = Allowance.generate_id ()
-        u_name =input('Enter  allowance name : ')
-        #u_rate =int(input('Enter allowance rate : '))
-        allowance  = Allowance(payroll.payrollid,employee.empid ,u_name) # implemented composition 
-        amount = allowance.fixed_allowance()
-        allowance_list.append(amount)
-        total_amount = sum(allowance_list)
- 
-     
-        new_allowance = {
-        'Allowance id' : allowance.id,
-        'Payroll number  ' :  allowance.payrollid,
-        'Employment id ' : allowance.employmentid,
-        'Allowance name ' : allowance.name,
-        'Allowance amount' :allowance.fixed_allowance(),
-       
-       }
-
-        mainjson.append(new_allowance)
-       # allowance_list  = allowance.add_allowance(allowance.amount)
-        
- 
-        with open ("main.json",'w') as file :
-                json.dump(mainjson,file, indent = 4)
-
-                
-
-        add_allowance = input ('Do you want to add another allowance (y/n) : ')    
-        
-        if  add_allowance  == 'y' :
-                continue 
-        else :
-                break  
-
-with open("main.json","w") as file_1:
-        mainjson.append(total_amount)
-        json.dump(mainjson,file_1,indent= 4)         
-#print (total_amount)             
-
-#DEDUCTION         
-try:
-        with open ('main.json','r') as file :
-                mainjson = json.load(file)
-
-
-except FileNotFoundError:
-        print("File not found. Creating a new file.")
-        mainjson= []
-except json.decoder.JSONDecodeError:
-        print('File not yet created. Creating a new file')
-        mainjson = []        
-
-deduction_list =  []
+allowance_records = []
+allowance_amounts = []
 
 while True:
-        u_deductionid = Deduction.generate_id
-        u_decname = input ('Enter decution name  :')
-        #u_rate = int(input ('Enter rate of deduction  :'))
-        
+    allowance_name = input("Enter allowance name (Housing, Transport, Medical, Internet): ")
+    allowance = Allowance(payroll.payrollid, employee.empid, allowance_name)
+    allowance_amount = allowance.fixed_allowance()
 
+    if not isinstance(allowance_amount, (int, float)):
+        print("Unknown allowance name. Please choose one of the listed names.")
+        continue
 
-        deduction = Deduction(u_decname,payroll.payrollid,employee.empid)   
-        amount = deduction.fixed_deductions()
-        deduction_list.append(amount)
-        totaldeduction_amount = sum(deduction_list)
-         
+    allowance_record = {
+        "id": allowance.id,
+        "payroll_id": allowance.payrollid,
+        "employee_id": allowance.employmentid,
+        "name": allowance.name,
+        "amount": allowance_amount,
+    }
+    data["allowances"].append(allowance_record)
+    allowance_records.append(allowance_record)
+    allowance_amounts.append(allowance_amount)
 
-        new_dedecution = {
-                'deduction_id' : deduction.id,
-                'deduction_name': deduction.deduction_name,
-                
-                'Payroll number ' : deduction.payrollnumber,
-                'Employee_id' : deduction.employeeid,
-                
-                'Amount to be deducted' : deduction.fixed_deductions(),
-                
-        } 
+    if input("Add another allowance? (y/n): ").lower() != "y":
+        break
 
-        with open ("main.json",'w') as file :
-                        mainjson.append(new_dedecution)
-                        json.dump( mainjson,file, indent = 4)
+total_allowances = sum(allowance_amounts)
 
-        add_allowance = input ('Do you want to add another allowance (y/n) : ')    
+deduction_records = []
+deduction_amounts = []
+while True:
+    deduction_name = input("Enter deduction name (NSSF, PAYE, Fine): ")
+    deduction = Deduction(deduction_name, payroll.payrollid, employee.empid)
+    deduction_amount = deduction.fixed_deductions()
 
-        if  add_allowance  == 'y' :
-                continue 
-        else :
-                break  
-with open("main.json","w") as file_1:
-        mainjson.append(totaldeduction_amount)
-        json.dump(mainjson,file_1,indent= 4)          
-#print (totaldeduction_amount)                
-        
-#PAYSLIP              
-try:
-        with open ('main.json','r') as file :
-         mainjson = json.load(file)
+    if not isinstance(deduction_amount, (int, float)):
+        print("Unknown deduction name. Please choose one of the listed names.")
+        continue
 
-except FileNotFoundError:
-        print("File not found. Creating a new file.")
-        mainjson = []
-    
+    deduction_records.append(
+        {
+            "id": deduction.id,
+            "name": deduction.deduction_name,
+            "amount": deduction_amount,
+        }
+    )
+    deduction_amounts.append(deduction_amount)
 
-u_payslipid =  Payslip.generate_id() 
+    if input("Add another deduction? (y/n): ").lower() != "y":
+        break
 
-payslip = Payslip (employee.firstname,totaldeduction_amount,total_amount,salary.hoursworked)#applied composition
-print(payslip)
-payslip.set_gross(salary.salaryamount) 
+total_deductions = sum(deduction_amounts)
+payslip = Payslip(
+    employee.firstname,
+    total_deductions,
+    total_allowances,
+    salary.hoursworked,
+)
+payslip.set_gross(salary.salaryamount)
 payslip.compute_net()
-#to dict 
 
+data["payrolls"].append(
+    {
+        "id": payroll.payrollid,
+        "date": payroll.date.isoformat(),
+        "employee_id": employee.empid,
+        "salary": {
+            "hours_worked": salary.hoursworked,
+            "rate_per_hour": salary.rateperhour,
+            "amount": salary.get_salary(),
+        },
+        "deductions": deduction_records,
+        "payslip": {
+            "id": payslip.id,
+            "total_allowances": total_allowances,
+            "total_deductions": total_deductions,
+            "gross": payslip.get_gross(),
+            "net": payslip.get_net(),
+        },
+    }
+)
 
-new_payslip = {
-    'Payslip id' : payslip.id,
-    'Employee name ' : payslip.employeename,
-    'Total deductions  ' : payslip.totaldeductions,
-    'Total allowances ' : payslip.totalallowances,
-    'hours worked' : payslip.hoursworked,
-    'Gross' : payslip.get_gross (),
-    'Net' : payslip.get_net(),
-    
-}
-mainjson.append(new_payslip)
+with open(DATA_FILE, "w", encoding="utf-8") as file:
+    json.dump(data, file, indent=4)
 
-with open ("main.json",'w') as file :
-    
-        json.dump( mainjson,file, indent = 4)
-    
-        
-#NEDD TO MOVE POSITIOON OBJECT        
-#title \position 
-   
-u_title = employee.position
-u_department = department.departmentname 
-u_salary =  salary.salaryamount
-
-
-position = Position(u_title,u_department,u_salary)
-
-print ('\t++++++POSITION DETAILS++++++')
-print (position)
-
+print("Employee and payroll data saved to main.json")

@@ -1,0 +1,1005 @@
+[
+    {
+        "Department id": "Dept2",
+        "Department name  ": "SALES"
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "KASODDE",
+        "Last name ": "RASHAD",
+        "Birth year": 1995,
+        "Department": "SALES",
+        "Gender": "MALE",
+        "Status": "ACTIVE",
+        "Position": "SALES PERSONNEL",
+        "Contact": "09876467",
+        "Address": "KAWANDA in KAWEMPE",
+        "Age": 31
+    },
+    {
+        "Employee_id": "EMP3",
+        "Employee name  ": "KASODDE",
+        "hours_worked": 70,
+        "Hour_rate": 15000,
+        "Salary ": 1050000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "HOUSING",
+        "Allowance rate ": 12,
+        "Allowance amount": 126000.0
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "PAYE",
+        "deduction_rate": 5,
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "salary": 1050000,
+        "Amount to be deducted": 52500.0
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "SALES"
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "KASODDE",
+        "Last name ": "RASHAD",
+        "Birth year": 1995,
+        "Department": "SALES",
+        "Gender": "MALE",
+        "Status": "ACTIVE",
+        "Position": "SALES PERSONNEL",
+        "Contact": "09876467",
+        "Address": "KAWANDA in KAWEMPE",
+        "Age": 31
+    },
+    {
+        "Employee_id": "EMP3",
+        "Employee name  ": "KASODDE",
+        "hours_worked": 70,
+        "Hour_rate": 15000,
+        "Salary ": 1050000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "HOUSING",
+        "Allowance rate ": 12,
+        "Allowance amount": 126000.0
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "PAYE",
+        "deduction_rate": 5,
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "salary": 1050000,
+        "Amount to be deducted": 52500.0
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "SALES"
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "IT"
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "IT"
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "KASODDE",
+        "Last name ": "SAAD",
+        "Birth year": 1994,
+        "Department": "IT",
+        "Gender": "F",
+        "Status": "AACTIVE",
+        "Position": "SALES MANAGER",
+        "Contact": "09875456",
+        "Address": "KAMPALA in KIBULI",
+        "Age": 32
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "KASODDE",
+        "hours_worked": 40,
+        "Hour_rate": 10000,
+        "Salary ": 400000
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "PAYE",
+        "deduction_rate": 12,
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "salary": 400000,
+        "Amount to be deducted": 48000.0
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "IT"
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "KASODDE",
+        "Last name ": "SAAD",
+        "Birth year": 1994,
+        "Department": "IT",
+        "Gender": "F",
+        "Status": "AACTIVE",
+        "Position": "SALES MANAGER",
+        "Contact": "09875456",
+        "Address": "KAMPALA in KIBULI",
+        "Age": 32
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "KASODDE",
+        "hours_worked": 40,
+        "Hour_rate": 10000,
+        "Salary ": 400000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "HOUSING",
+        "Allowance rate ": 10,
+        "Allowance amount": 40000.0
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "PAYE",
+        "deduction_rate": 5,
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "salary": 400000,
+        "Amount to be deducted": 20000.0
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "IT"
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Ssempereza ",
+        "Last name ": "Allan",
+        "Birth year": 1987,
+        "Department": "SALES ",
+        "Gender": "F",
+        "Status": "active",
+        "Position": "sales manager ",
+        "Contact": "09457805678",
+        "Address": "KIBULI in KAMPALA",
+        "Age": 39
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Ssempereza ",
+        "hours_worked": 50,
+        "Hour_rate": 12000,
+        "Salary ": 600000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "housing",
+        "Allowance rate ": 12,
+        "Allowance amount": 72000.0
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "PAYE",
+        "deduction_rate": 10,
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "salary": 600000,
+        "Amount to be deducted": 60000.0
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "SANDE",
+        "Last name ": "CHEEKS",
+        "Birth year": 1987,
+        "Department": "SALES",
+        "Gender": "F",
+        "Status": "ACTIVE",
+        "Position": "SALES ",
+        "Contact": "09874567",
+        "Address": "KAMP in KIBULI",
+        "Age": 39
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "SALES"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "SANDE",
+        "hours_worked": 676,
+        "Hour_rate": 12,
+        "Salary ": 8112
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "TRANSPORT",
+        "Allowance rate ": 12,
+        "Allowance amount": 0
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "tuo",
+        "deduction_rate": 7,
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "salary": 8112,
+        "Amount to be deducted": 567.84
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "SANDE",
+        "Last name ": "CHEEKS",
+        "Birth year": 1987,
+        "Department": "SALES",
+        "Gender": "F",
+        "Status": "ACTIVE",
+        "Position": "SALES ",
+        "Contact": "09874567",
+        "Address": "KAMP in KIBULI",
+        "Age": 39
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "SALES"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "SANDE",
+        "hours_worked": 676,
+        "Hour_rate": 10000,
+        "Salary ": 6760000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "transport",
+        "Allowance rate ": 12,
+        "Allowance amount": 0
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "housing",
+        "Allowance rate ": 6,
+        "Allowance amount": 0
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "paye",
+        "deduction_rate": 8,
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "salary": 6760000,
+        "Amount to be deducted": 540800.0
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "briungi ",
+        "Last name ": "may",
+        "Birth year": 1995,
+        "Department": "IT",
+        "Gender": "F",
+        "Status": "active",
+        "Position": "manager",
+        "Contact": "0987654",
+        "Address": "KIBULI in KAMPALA",
+        "Age": 31
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "sales"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "briungi ",
+        "hours_worked": 13,
+        "Hour_rate": 20000,
+        "Salary ": 260000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "housing ",
+        "Allowance rate ": 12,
+        "Allowance amount": 31200.0
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "transport",
+        "Allowance rate ": 10,
+        "Allowance amount": 26000.0
+    },
+    {
+        "Allowance id": "ALl6",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "health ",
+        "Allowance rate ": 5,
+        "Allowance amount": 13000.0
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "paye",
+        "deduction_rate": 2,
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "salary": 260000,
+        "Amount to be deducted": 5200.0
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "qr43t",
+        "Last name ": "ewrtr",
+        "Birth year": 1234,
+        "Department": "erwqg",
+        "Gender": "dsf",
+        "Status": "fds",
+        "Position": "htn",
+        "Contact": "tr",
+        "Address": "SAF in DSV",
+        "Age": 792
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "sdfg"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "qr43t",
+        "hours_worked": 34,
+        "Hour_rate": 100,
+        "Salary ": 3400
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "mariam",
+        "Last name ": "ionm",
+        "Birth year": 2303,
+        "Department": "salaes",
+        "Gender": "female ",
+        "Status": "active ",
+        "Position": "manager ",
+        "Contact": "0987657",
+        "Address": "KIBULI  in KAMPALA",
+        "Age": -277
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "sales"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "mariam",
+        "hours_worked": 12,
+        "Hour_rate": 10000,
+        "Salary ": 120000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "mariam",
+        "Last name ": "ionm",
+        "Birth year": 2303,
+        "Department": "salaes",
+        "Gender": "female ",
+        "Status": "active ",
+        "Position": "manager ",
+        "Contact": "0987657",
+        "Address": "KIBULI  in KAMPALA",
+        "Age": -277
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "sales"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "mariam",
+        "hours_worked": 12,
+        "Hour_rate": 10000,
+        "Salary ": 120000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "housing ",
+        "Allowance rate ": 5,
+        "Allowance amount": 6000.0
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "tp",
+        "Allowance rate ": 12,
+        "Allowance amount": 14400.0
+    },
+    {
+        "Allowance id": "ALl6",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "wqe",
+        "Allowance rate ": 6,
+        "Allowance amount": 7200.0
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "ret",
+        "deduction_rate": 2,
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "salary": 120000,
+        "Amount to be deducted": 2400.0
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Haan",
+        "Last name ": "Kulumba ",
+        "Birth year": 1999,
+        "Department": "IT",
+        "Gender": "M",
+        "Status": "active",
+        "Position": "manager",
+        "Contact": "08768764764",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 27
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Computer"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Haan",
+        "hours_worked": 40,
+        "Hour_rate": 1000,
+        "Salary ": 40000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Haan",
+        "Last name ": "Kulumba ",
+        "Birth year": 1999,
+        "Department": "IT",
+        "Gender": "M",
+        "Status": "active",
+        "Position": "manager",
+        "Contact": "08768764764",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 27
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Computer"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Haan",
+        "hours_worked": 40,
+        "Hour_rate": 1000,
+        "Salary ": 40000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Haan",
+        "Last name ": "Kulumba ",
+        "Birth year": 1999,
+        "Department": "IT",
+        "Gender": "M",
+        "Status": "active",
+        "Position": "manager",
+        "Contact": "08768764764",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 27
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Computer"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Haan",
+        "hours_worked": 40,
+        "Hour_rate": 1000,
+        "Salary ": 40000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Saad",
+        "Last name ": "Kariiimyu",
+        "Birth year": 2000,
+        "Department": "IT",
+        "Gender": "M",
+        "Status": "Status",
+        "Position": "dept",
+        "Contact": "2345678",
+        "Address": "WELL in GWE ANI",
+        "Age": 26
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "security by knox"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Saad",
+        "hours_worked": 200,
+        "Hour_rate": 100,
+        "Salary ": 20000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Transport",
+        "Allowance amount": 30000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Maay",
+        "Last name ": "Mulumba",
+        "Birth year": 1235,
+        "Department": "Sales",
+        "Gender": "F",
+        "Status": "Wants a divorce",
+        "Position": "Dept heada",
+        "Contact": "1234567",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 791
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Admin oba waaki"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Maay",
+        "hours_worked": 20,
+        "Hour_rate": 10,
+        "Salary ": 200
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Transport",
+        "Allowance amount": 30000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Maay",
+        "Last name ": "Mulumba",
+        "Birth year": 1235,
+        "Department": "Sales",
+        "Gender": "F",
+        "Status": "Wants a divorce",
+        "Position": "Dept heada",
+        "Contact": "1234567",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 791
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Admin oba waaki"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Maay",
+        "hours_worked": 20,
+        "Hour_rate": 10,
+        "Salary ": 200
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Transport",
+        "Allowance amount": 30000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Maay",
+        "Last name ": "Mulumba",
+        "Birth year": 1235,
+        "Department": "Sales",
+        "Gender": "F",
+        "Status": "Wants a divorce",
+        "Position": "Dept heada",
+        "Contact": "1234567",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 791
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Admin oba waaki"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Maay",
+        "hours_worked": 2,
+        "Hour_rate": 12,
+        "Salary ": 24
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Transport",
+        "Allowance amount": 30000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Maay",
+        "Last name ": "Mulumba",
+        "Birth year": 1235,
+        "Department": "Sales",
+        "Gender": "F",
+        "Status": "Wants a divorce",
+        "Position": "Dept heada",
+        "Contact": "1234567",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 791
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Admin oba waaki"
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Maay",
+        "Last name ": "Mulumba",
+        "Birth year": 1235,
+        "Department": "Sales",
+        "Gender": "F",
+        "Status": "Wants a divorce",
+        "Position": "Dept heada",
+        "Contact": "1234567",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 791
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Admin oba waaki"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Maay",
+        "hours_worked": 2,
+        "Hour_rate": 12,
+        "Salary ": 24
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Transport",
+        "Allowance amount": 30000
+    },
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "NSSF",
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "Amount to be deducted": 50000
+    },
+    {
+        "deduction_id": "Ded2",
+        "deduction_name": "PAYE",
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "Amount to be deducted": 30000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Maay",
+        "Last name ": "Mulumba",
+        "Birth year": 1235,
+        "Department": "Sales",
+        "Gender": "F",
+        "Status": "Wants a divorce",
+        "Position": "Dept heada",
+        "Contact": "1234567",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 791
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Admin oba waaki"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Maay",
+        "hours_worked": 2,
+        "Hour_rate": 12,
+        "Salary ": 24
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Transport",
+        "Allowance amount": 30000
+    },
+    {
+        "employeeid": "EMP2",
+        "First name ": "Maay",
+        "Last name ": "Mulumba",
+        "Birth year": 1235,
+        "Department": "Sales",
+        "Gender": "F",
+        "Status": "Wants a divorce",
+        "Position": "Dept heada",
+        "Contact": "1234567",
+        "Address": "KAWEMPE in KIBULI",
+        "Age": 791
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "Admin oba waaki"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "Maay",
+        "hours_worked": 2,
+        "Hour_rate": 12,
+        "Salary ": 24
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Transport",
+        "Allowance amount": 30000
+    },
+    80000,
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "NSSF",
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "Amount to be deducted": 1500000
+    },
+    {
+        "deduction_id": "Ded2",
+        "deduction_name": "PAYE",
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "Amount to be deducted": 50000
+    },
+    1550000,
+    {
+        "employeeid": "EMP2",
+        "First name ": "ola",
+        "Last name ": "police",
+        "Birth year": 1987,
+        "Department": "sales",
+        "Gender": "m",
+        "Status": "active",
+        "Position": "sales person ",
+        "Contact": "0776423456",
+        "Address": "KIBULI in KAMPALA",
+        "Age": 39
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "sales"
+    },
+    {
+        "Department id": "Dept4",
+        "Department name  ": "it"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "ola",
+        "hours_worked": 123,
+        "Hour_rate": 10000,
+        "Salary ": 1230000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    {
+        "Allowance id": "ALl4",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Transport",
+        "Allowance amount": 30000
+    },
+    80000,
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "PAYE",
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "Amount to be deducted": 50000
+    },
+    50000,
+    {
+        "employeeid": "EMP2",
+        "First name ": "derry",
+        "Last name ": "Asotr",
+        "Birth year": 1990,
+        "Department": "sales",
+        "Gender": "m",
+        "Status": "active",
+        "Position": "managewr",
+        "Contact": "1234567890",
+        "Address": "KIBULI in KAMPALA",
+        "Age": 36
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "sales"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "derry",
+        "hours_worked": 12,
+        "Hour_rate": 19000,
+        "Salary ": 228000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    50000,
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "NSSF",
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "Amount to be deducted": 150000
+    },
+    {
+        "deduction_id": "Ded2",
+        "deduction_name": "PAYE",
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "Amount to be deducted": 50000
+    },
+    200000,
+    {
+        "employeeid": "EMP2",
+        "First name ": "derry",
+        "Last name ": "Asotr",
+        "Birth year": 1990,
+        "Department": "sales",
+        "Gender": "m",
+        "Status": "active",
+        "Position": "managewr",
+        "Contact": "1234567890",
+        "Address": "KIBULI in KAMPALA",
+        "Age": 36
+    },
+    {
+        "Department id": "Dept2",
+        "Department name  ": "sales"
+    },
+    {
+        "Employee_id": "EMP2",
+        "Employee name  ": "derry",
+        "hours_worked": 12,
+        "Hour_rate": 19000,
+        "Salary ": 228000
+    },
+    {
+        "Allowance id": "ALl2",
+        "Payroll number  ": "PAY2",
+        "Employment id ": "EMP2",
+        "Allowance name ": "Housing",
+        "Allowance amount": 50000
+    },
+    50000,
+    {
+        "deduction_id": "Ded1",
+        "deduction_name": "NSSF",
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "Amount to be deducted": 150000
+    },
+    {
+        "deduction_id": "Ded2",
+        "deduction_name": "PAYE",
+        "Payroll number ": "PAY2",
+        "Employee_id": "EMP2",
+        "Amount to be deducted": 50000
+    },
+    200000,
+    {
+        "Payslip id": "PAY2",
+        "Employee name ": "derry",
+        "Total deductions  ": 200000,
+        "Total allowances ": 50000,
+        "hours worked": 12,
+        "Gross": 278000,
+        "Net": 78000
+    }
+]
