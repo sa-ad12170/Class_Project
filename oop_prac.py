@@ -134,28 +134,46 @@ class Salary :
         
 #child class of employee 
 class Deduction:
-        deduction_id= 0
-        @classmethod
-        def generate_id(cls):
-            d_id = "Ded"
-            cls.deduction_id +=1 
-            return d_id + str(cls.deduction_id)
-        def __init__(self,deductionname,deductionrate,payrollnumber,employeeid ,salary):
-            self.id =self.generate_id()
-            self.deduction_name =deductionname
-            self.deduction_rate =deductionrate
-            self.payrollnumber =payrollnumber
-            self.employeeid =employeeid
-            self.salary = salary
-            self.amount = self.compute_amount()#made it public 
-
+    deduction_id= 0
+    @classmethod
+    def generate_id(cls):
+        d_id = "Ded"
+        cls.deduction_id +=1 
+        return d_id + str(cls.deduction_id)
+    def __init__(self,deductionname,payrollnumber,employeeid ):
+        self.id =self.generate_id()
+        self.deduction_name =deductionname
         
+        self.payrollnumber =payrollnumber
+        self.employeeid =employeeid
+        
+        self.amount = self.fixed_deductions()#made it public 
+
+    
 #different rates for different deductions
-        def compute_amount(self):
-            self.__amount =  (self.salary * (self.deduction_rate/100 ))
-            return self.__amount
-        def get_amount (self):
-            return self.__amount
+    def compute_amount(self):
+        self.__amount =  (self.salary * (self.deduction_rate/100 ))
+        return self.__amount
+    def get_amount (self):
+        return self.__amount
+
+    def fixed_deductions(self):
+            if self.deduction_name.upper() == "NSSF":
+                self.amount = 150000
+            elif self.deduction_name.upper() == "PAYE":
+                self.amount = 50000
+            elif self.deduction_name.upper() == "FINE":
+                self.amount = 100000
+                
+        
+            else:
+                return "Gwe tax defaulter  "
+
+            return self.amount 
+    #def todict(self) :
+          #yf  
+        
+
 
 
 class Allowance:
@@ -165,28 +183,38 @@ class Allowance:
         a_id = "ALl"
         cls.all_id +=1 
         return a_id + str(cls.all_id)
-    def __init__(self,payrollid,employmentid,name,rate,salary):
+    def __init__(self,payrollid,employmentid,name):
         self.id =self.generate_id()
         self.payrollid =payrollid
         self.employmentid =employmentid
         self.name = name
-        self.rate = rate
-        self.salary = salary
-        self.amount = self.compute_amount()
+       
+        self.amount = self.fixed_allowance()
         self.allowances = []
 
     def __str__(self):
         return f'Payroll id :{self.payrollid}\nAllowance Id :{self.id}\nEmployee Id :{self.employmentid}\nAllowance Rate :{self.name}\nRate :{self.rate}'
-    def compute_amount(self):        
-            self.amountrate = (self.rate/100)
-            self.amount = self.amountrate * self.salary 
-            return self.amount
+    # def compute_amount(self):        
+    #         self.amountrate = (self.rate/100)
+    #         self.amount = self.amountrate * self.salary 
+    #         return self.amount
     def add_allowance(self,allowance):
         self.allowances.append(allowance) 
 
+    def fixed_allowance(self):
+        if self.name == "Housing":
+            self.amount = 50000
+        elif self.name == "Transport":
+            self.amount = 30000
+        elif self.name == "Medical":
+            self.amount = 100000
 
+        elif self.name == "Internet":
+            self.amount = 5000  
+        else:
+            return "gwe kwegamba toyagala sente nonyinga else "
 
-
+        return self.amount           
 class Payroll:
     pay_id= 0
     @classmethod
@@ -208,8 +236,6 @@ class Payroll:
     #NEED TO GET A LIST OF ALL EMPLOYESS PAID AND THEIR RESPECTIVE SALARIES SO THAT WE CAN GET THE TOTAL OF THE PAYROLL 
 
     
-
-
 #child class from employeeS
 #has a bug 
 class Payslip:
@@ -231,7 +257,7 @@ class Payslip:
         
 
     def __str__(self):
-        return f'Payslip id -------->\t{self.id}\nTotal Deductions\t: {self.totaldeductions}\nTotal Allowances\t: {self.totalallowances}\nHours Worked\t: {self.hoursworked}'
+        return f'\tPayslip id -------->\t{self.id}\nTotal Deductions\t: {self.totaldeductions}\nTotal Allowances\t: {self.totalallowances}\nHours Worked\t: {self.hoursworked}'
 
     def set_gross(self,salary)  :
         self.__gross = salary  + self.totalallowances
@@ -239,7 +265,6 @@ class Payslip:
         
     def get_gross (self):
         return self.__gross 
-
 
     def compute_net(self):
         self.__net = self.__gross -  self.totaldeductions

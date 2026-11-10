@@ -191,14 +191,17 @@ except json.decoder.JSONDecodeError:
         print('File not yet created. Creating a new file')
         mainjson = []
 
+allowance_list = []
 while True :       
        
         
         u_id = Allowance.generate_id ()
         u_name =input('Enter  allowance name : ')
-        u_rate =int(input('Enter allowance rate : '))
-        allowance  = Allowance(payroll.payrollid,employee.empid ,u_name,u_rate,salary.salaryamount) # implemented composition 
-        
+        #u_rate =int(input('Enter allowance rate : '))
+        allowance  = Allowance(payroll.payrollid,employee.empid ,u_name) # implemented composition 
+        amount = allowance.fixed_allowance()
+        allowance_list.append(amount)
+        total_amount = sum(allowance_list)
  
      
         new_allowance = {
@@ -206,13 +209,12 @@ while True :
         'Payroll number  ' :  allowance.payrollid,
         'Employment id ' : allowance.employmentid,
         'Allowance name ' : allowance.name,
-        'Allowance rate ' : allowance.rate,
-        'Allowance amount' :allowance.compute_amount(),
+        'Allowance amount' :allowance.fixed_allowance(),
        
        }
 
         mainjson.append(new_allowance)
-        allowance_list  = allowance.add_allowance(allowance.amount)
+       # allowance_list  = allowance.add_allowance(allowance.amount)
         
  
         with open ("main.json",'w') as file :
@@ -225,8 +227,12 @@ while True :
         if  add_allowance  == 'y' :
                 continue 
         else :
-                break   
-print (allowance_list)             
+                break  
+
+with open("main.json","w") as file_1:
+        mainjson.append(total_amount)
+        json.dump(mainjson,file_1,indent= 4)         
+#print (total_amount)             
 
 #DEDUCTION         
 try:
@@ -241,31 +247,47 @@ except json.decoder.JSONDecodeError:
         print('File not yet created. Creating a new file')
         mainjson = []        
 
+deduction_list =  []
 
-u_deductionid = Deduction.generate_id
-u_decname = input ('Enter decution name  :')
-u_rate = int(input ('Enter rate of deduction  :'))
-
-
-
-deduction = Deduction(u_decname,u_rate,payroll.payrollid,employee.empid,salary.salaryamount)    
-
-new_dedecution = {
-        'deduction_id' : deduction.id,
-        'deduction_name': deduction.deduction_name,
-        'deduction_rate':deduction.deduction_rate,
-        'Payroll number ' : deduction.payrollnumber,
-        'Employee_id' : deduction.employeeid,
-        'salary' : deduction.salary,
-        'Amount to be deducted' : deduction.compute_amount(),
+while True:
+        u_deductionid = Deduction.generate_id
+        u_decname = input ('Enter decution name  :')
+        #u_rate = int(input ('Enter rate of deduction  :'))
         
-} 
 
-with open ("main.json",'w') as file :
-                mainjson.append(new_dedecution)
-                json.dump( mainjson,file, indent = 4)
+
+        deduction = Deduction(u_decname,payroll.payrollid,employee.empid)   
+        amount = deduction.fixed_deductions()
+        deduction_list.append(amount)
+        totaldeduction_amount = sum(deduction_list)
+         
+
+        new_dedecution = {
+                'deduction_id' : deduction.id,
+                'deduction_name': deduction.deduction_name,
+                
+                'Payroll number ' : deduction.payrollnumber,
+                'Employee_id' : deduction.employeeid,
+                
+                'Amount to be deducted' : deduction.fixed_deductions(),
+                
+        } 
+
+        with open ("main.json",'w') as file :
+                        mainjson.append(new_dedecution)
+                        json.dump( mainjson,file, indent = 4)
+
+        add_allowance = input ('Do you want to add another allowance (y/n) : ')    
+
+        if  add_allowance  == 'y' :
+                continue 
+        else :
+                break  
+with open("main.json","w") as file_1:
+        mainjson.append(totaldeduction_amount)
+        json.dump(mainjson,file_1,indent= 4)          
+#print (totaldeduction_amount)                
         
-       
 #PAYSLIP              
 try:
         with open ('main.json','r') as file :
@@ -278,10 +300,11 @@ except FileNotFoundError:
 
 u_payslipid =  Payslip.generate_id() 
 
-payslip = Payslip (employee.firstname,deduction.amount,allowance.amount,salary.hoursworked)#applied composition
+payslip = Payslip (employee.firstname,totaldeduction_amount,total_amount,salary.hoursworked)#applied composition
 print(payslip)
 payslip.set_gross(salary.salaryamount) 
 payslip.compute_net()
+#to dict 
 
 
 new_payslip = {
@@ -296,7 +319,7 @@ new_payslip = {
 }
 mainjson.append(new_payslip)
 
-with open ("mainjson.json",'w') as file :
+with open ("main.json",'w') as file :
     
         json.dump( mainjson,file, indent = 4)
     
