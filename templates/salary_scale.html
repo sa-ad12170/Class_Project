@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Salary scale{% endblock %}
+
+{% block content %}
+    <h2>Salary scale</h2>
+    {% if message %}<p>{{ message }}</p>{% endif %}
+    {% if error %}<p>{{ error }}</p>{% endif %}
+
+    <table border="1">
+        <thead><tr><th>Position</th><th>Monthly salary (UGX)</th></tr></thead>
+        <tbody>
+            {% for title in titles %}
+                <tr><td>{{ title }}</td><td>{{ scale[title] }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Update a position salary</h3>
+    <form action="{{ url_for('salary_scale') }}" method="post">
+        <label>Position:
+            <select name="title" required>
+                {% for title in titles %}<option value="{{ title }}">{{ title }}</option>{% endfor %}
+            </select>
+        </label>
+        <label>New monthly salary (UGX): <input type="number" name="amount" min="0" step="0.01" required></label>
+        <button type="submit">Save salary</button>
+    </form>
+{% endblock %}

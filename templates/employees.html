@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Employees{% endblock %}
+
+{% block content %}
+    <h2>Employees</h2>
+    {% if message %}<p>{{ message }}</p>{% endif %}
+    {% if error %}<p>{{ error }}</p>{% endif %}
+
+    <h3>Add an employee</h3>
+    <form action="{{ url_for('employees') }}" method="post">
+        <p><label>First name: <input name="first_name" required></label></p>
+        <p><label>Last name: <input name="last_name" required></label></p>
+        <p><label>Date of birth: <input type="date" name="date_of_birth" required></label></p>
+        <p><label>Contact: <input name="contact"></label></p>
+        <p><label>Village: <input name="village"></label></p>
+        <p><label>City: <input name="city"></label></p>
+        <p><label>Gender: <input name="gender"></label></p>
+        <p>
+            <label>Department:
+                <select name="department" required>
+                    {% for department in departments %}
+                        <option value="{{ department.departmentname }}">{{ department.departmentname }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </p>
+        <p>
+            <label>Position:
+                <select name="position_title" required>
+                    {% for title in titles %}
+                        <option value="{{ title }}">{{ title }} — UGX {{ scale[title] }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </p>
+        <p>
+            <label>Status:
+                <select name="status">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </label>
+        </p>
+        <p>
+            <label>Tax resident in Uganda?
+                <select name="tax_resident">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </label>
+        </p>
+        <button type="submit">Add employee</button>
+    </form>
+
+    <h3>Employee list</h3>
+    <table border="1">
+        <thead>
+            <tr><th>ID</th><th>Name</th><th>Department</th><th>Position</th><th>Status</th><th>Salary (UGX)</th><th>Age</th><th>Remove</th></tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.id }}</td>
+                    <td>{{ employee.full_name }}</td>
+                    <td>{{ employee.department }}</td>
+                    <td>{{ employee.position.title }}</td>
+                    <td>{{ employee.status }}</td>
+                    <td>{{ employee.salary }}</td>
+                    <td>{{ employee.age }}</td>
+                    <td>
+                        <form action="{{ url_for('remove_employee') }}" method="post">
+                            <input type="hidden" name="employee_id" value="{{ employee.id }}">
+                            <label><input type="checkbox" name="confirm" value="yes" required> Confirm</label>
+                            <button type="submit">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="8">No employees found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

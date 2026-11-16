@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Payroll roster{% endblock %}
+
+{% block content %}
+    <h2>Active payroll roster</h2>
+    <p>This list includes active employees currently included in payroll.</p>
+    <table border="1">
+        <thead>
+            <tr><th>Employee ID</th><th>Name</th><th>Position</th><th>Department</th><th>Monthly salary (UGX)</th></tr>
+        </thead>
+        <tbody>
+            {% for employee in roster %}
+                <tr>
+                    <td>{{ employee.employee_id }}</td>
+                    <td>{{ employee.employee_name }}</td>
+                    <td>{{ employee.position }}</td>
+                    <td>{{ employee.department }}</td>
+                    <td>{{ employee.monthly_salary }}</td>
+                </tr>
+            {% else %}
+                <tr><td colspan="5">No active employees in the roster.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

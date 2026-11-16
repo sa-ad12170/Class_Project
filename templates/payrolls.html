@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Payroll runs{% endblock %}
+
+{% block content %}
+    <h2>Payroll runs</h2>
+    {% if message %}<p>{{ message }}</p>{% endif %}
+    {% if error %}<p>{{ error }}</p>{% endif %}
+
+    <h3>Start a payroll run</h3>
+    <p>This calculates pay for all active employees using their current salaries and allowances.</p>
+    <form action="{{ url_for('payrolls') }}" method="post">
+        <label>Pay date: <input type="date" name="pay_date"></label>
+        <button type="submit">Run payroll</button>
+    </form>
+
+    <h3>Previous payroll runs</h3>
+    <table border="1">
+        <thead><tr><th>Payroll ID</th><th>Date</th><th>Employees</th><th>Total gross (UGX)</th><th>Total deductions (UGX)</th><th>Total net (UGX)</th></tr></thead>
+        <tbody>
+            {% for payroll in payrolls %}
+                <tr>
+                    <td><a href="{{ url_for('payslips', payroll_id=payroll.id) }}">{{ payroll.id }}</a></td>
+                    <td>{{ payroll.date }}</td>
+                    <td>{{ payroll.employee_count }}</td>
+                    <td>{{ payroll.total_gross }}</td>
+                    <td>{{ payroll.total_deductions }}</td>
+                    <td>{{ payroll.total_net }}</td>
+                </tr>
+            {% else %}
+                <tr><td colspan="6">No payroll runs have been saved.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

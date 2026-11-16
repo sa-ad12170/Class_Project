@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Payslips{% endblock %}
+
+{% block content %}
+    <h2>Payslips</h2>
+    <form action="{{ url_for('payslips') }}" method="get">
+        <label>Payroll ID: <input name="payroll_id" value="{{ payroll_id }}"></label>
+        <label>Employee ID: <input name="employee_id" value="{{ employee_id }}"></label>
+        <button type="submit">Search</button>
+        <a href="{{ url_for('payslips') }}">Clear</a>
+    </form>
+
+    {% for slip in slips %}
+        <h3>{{ slip.employee_name }} — {{ slip.payroll_id }} ({{ slip.pay_date }})</h3>
+        <table border="1">
+            <tbody>
+                <tr><th>Employee ID</th><td>{{ slip.employee_id }}</td></tr>
+                <tr><th>Position</th><td>{{ slip.position }}</td></tr>
+                <tr><th>Department</th><td>{{ slip.department }}</td></tr>
+                <tr><th>Basic salary (UGX)</th><td>{{ slip.basic_salary }}</td></tr>
+                <tr><th>Total allowances (UGX)</th><td>{{ slip.total_allowances }}</td></tr>
+                <tr><th>Gross pay (UGX)</th><td>{{ slip.gross }}</td></tr>
+                <tr><th>NSSF (UGX)</th><td>{{ slip.nssf }}</td></tr>
+                <tr><th>PAYE (UGX)</th><td>{{ slip.paye }}</td></tr>
+                <tr><th>Total deductions (UGX)</th><td>{{ slip.total_deductions }}</td></tr>
+                <tr><th>Net pay (UGX)</th><td>{{ slip.net }}</td></tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p>No matching payslips found.</p>
+    {% endfor %}
+{% endblock %}

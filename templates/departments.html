@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Departments{% endblock %}
+
+{% block content %}
+    <h2>Departments</h2>
+
+    {% if message %}<p>{{ message }}</p>{% endif %}
+    {% if error %}<p>{{ error }}</p>{% endif %}
+
+    <h3>Add a department</h3>
+    <form action="{{ url_for('add_department') }}" method="post">
+        <label for="name">Department name:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">Add department</button>
+    </form>
+
+    <h3>Department list</h3>
+    <table border="1">
+        <thead>
+            <tr><th>ID</th><th>Name</th><th>Staff count</th></tr>
+        </thead>
+        <tbody>
+            {% for department in departments %}
+                <tr>
+                    <td>{{ department.deptid }}</td>
+                    <td>{{ department.departmentname }}</td>
+                    <td>{{ department.get_no_of_staff() }}</td>
+                </tr>
+            {% else %}
+                <tr><td colspan="3">No departments found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
