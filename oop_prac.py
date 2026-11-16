@@ -1,8 +1,3 @@
-"""Core payroll classes for the project.
-
-All model classes live here by design. The small module files in the project
-re-export these classes to keep older imports working.
-"""
 
 from abc import ABC, abstractmethod
 from datetime import date
@@ -64,9 +59,9 @@ class SalaryScale:
     DATA_SECTION = "salary_scales"
 
     def __init__(self, title, amount):
-        self.title = str(title)
-        if self.title not in self.DEFAULTS:
-            raise ValueError(f"Unknown position title: {title}")
+        self.title = str(title).strip().casefold()
+        if not self.title:
+            raise ValueError("Position title cannot be empty.")
         self.amount = float(amount)
         if self.amount < 0:
             raise ValueError("Salary cannot be negative.")
@@ -90,11 +85,11 @@ class SalaryScale:
             scale = cls.defaults()
             cls.save(scale)
             return scale
-        scale = {}
+        scale = cls.defaults()
         for row in records:
             if isinstance(row, dict) and "title" in row and "amount" in row:
-                title = str(row["title"])
-                if title in cls.DEFAULTS:
+                title = str(row["title"]).strip().casefold()
+                if title:
                     scale[title] = float(row["amount"])
         return scale
 
@@ -108,8 +103,8 @@ class SalaryScale:
     @classmethod
     def get_salary(cls, title, scale=None):
         scale = cls.load() if scale is None else scale
-        key = str(title)
-        if key not in cls.DEFAULTS or key not in scale:
+        key = str(title).strip().casefold()
+        if key not in scale:
             raise KeyError(f"No salary scale is defined for '{title}'.")
         return float(scale[key])
 
@@ -118,8 +113,8 @@ class Position:
     TITLES = ("regular worker", "department head", "team lead", "ceo", "coo")
 
     def __init__(self, title, department, salary=None):
-        self.title = str(title)
-        if self.title not in self.TITLES:
+        self.title = str(title).strip().casefold()
+        if self.title not in SalaryScale.load():
             raise ValueError(f"Unknown position title: {title}")
         self.department = str(department).strip()
         self.salary = SalaryScale.get_salary(self.title) if salary is None else float(salary)

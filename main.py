@@ -1,5 +1,3 @@
-"""Command-line entry point for employee and payroll management."""
-
 from datetime import date
 
 from data_store import load_records, save_records
@@ -21,7 +19,8 @@ def load_employees(scale):#purpose is to loaf all valid employees firm the depar
             title = record.get("position_title", "regular worker")
             if not isinstance(title, str):
                 continue
-            if title not in Position.TITLES or title not in scale:
+            title = title.strip().casefold()
+            if title not in scale:
                 continue
             position = Position(title, department.departmentname, scale[title])
             try:
@@ -87,7 +86,7 @@ def add_department(departments):
 def add_employee(departments, scale):
     employee_id = Employee.generate_id()
     print(f"Generated employee ID: {employee_id}")
-    title_choices = Position.TITLES
+    title_choices = list(scale)
     print("Positions:")
     for index, title in enumerate(title_choices, start=1):
         print(f"{index}. {title} - UGX {scale[title]:,.2f}")
@@ -232,16 +231,17 @@ def remove_employee(scale):
 
 
 def edit_salary_scale(scale):
+    titles = list(scale)
     print("\nMonthly salary scale (UGX):")
-    for index, title in enumerate(Position.TITLES, start=1):
+    for index, title in enumerate(titles, start=1):
         print(f"{index}. {title}: {scale[title]:,.2f}")
     choice = input("Choose a position to edit (Enter to cancel): ").strip()
     if not choice:
         return
-    if not choice.isdigit() or not 1 <= int(choice) <= len(Position.TITLES):
+    if not choice.isdigit() or not 1 <= int(choice) <= len(titles):
         print("Invalid position selection.")
         return
-    title = Position.TITLES[int(choice) - 1]
+    title = titles[int(choice) - 1]
     try:
         amount = float(input(f"New monthly salary for {title} (UGX): ").strip())
         if amount < 0:
@@ -321,8 +321,6 @@ def main():
     departments = load_departments()
     save_departments(departments)
     scale = SalaryScale.load()
-    for title in Position.TITLES:
-        scale.setdefault(title, SalaryScale.defaults()[title])
     SalaryScale.save(scale)
     sync_payroll_roster(scale)
     while True:

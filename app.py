@@ -1,5 +1,3 @@
-"""Beginner-friendly Flask pages for the employee payroll project."""
-
 from datetime import date
 
 from flask import Flask, redirect, render_template, request, url_for
@@ -67,7 +65,7 @@ def employees():
         try:
             if department is None:
                 raise ValueError("Choose a valid department.")
-            if title not in Position.TITLES:
+            if title not in scale:
                 raise ValueError("Choose a valid position.")
 
             position = Position(title, department.departmentname, scale[title])
@@ -93,7 +91,7 @@ def employees():
     scale, employee_list = get_employees()
     return render_template(
         "employees.html", employees=employee_list,
-        departments=load_departments(), titles=Position.TITLES,
+        departments=load_departments(), titles=list(scale),
         scale=scale, error=error, message=request.args.get("message")
     )
 
@@ -155,6 +153,31 @@ def payroll_roster():
     return render_template("payroll_roster.html", roster=roster)
 
 
+@app.route("/positions", methods=["GET", "POST"])
+def positions():
+    error = None
+    if request.method == "POST":
+        title = request.form.get("title", "").strip().casefold()
+        amount_text = request.form.get("amount", "")
+        scale = get_salary_scale()
+        try:
+            if not title:
+                raise ValueError("Position title cannot be empty.")
+            if title in scale:
+                raise ValueError(f"Position '{title}' already exists.")
+            amount = float(amount_text)
+            if amount < 0:
+                raise ValueError("Salary cannot be negative.")
+            scale[title] = amount
+            SalaryScale.save(scale)
+            return redirect(url_for("positions", message="Position added."))
+        except (TypeError, ValueError) as problem:
+            error = str(problem)
+
+    return render_template("positions.html", positions=get_salary_scale(),
+                           error=error, message=request.args.get("message"))
+
+
 @app.route("/allowances", methods=["GET", "POST"])
 def allowances():
     error = None
@@ -191,7 +214,7 @@ def salary_scale():
         amount_text = request.form.get("amount", "")
         scale = get_salary_scale()
         try:
-            if title not in Position.TITLES:
+            if title not in scale:
                 raise ValueError("Choose a valid position.")
             amount = float(amount_text)
             if amount < 0:
@@ -203,7 +226,7 @@ def salary_scale():
             error = str(problem)
 
     return render_template("salary_scale.html", scale=get_salary_scale(),
-                           titles=Position.TITLES, error=error,
+                           titles=list(get_salary_scale()), error=error,
                            message=request.args.get("message"))
 
 
