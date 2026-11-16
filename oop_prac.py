@@ -22,15 +22,17 @@ class Department:
         return department
 
     def add_staff(self, employee):
+        if not isinstance(employee, Employee):
+            raise TypeError("Department staff must be Employee objects.")
         for member in self.staff:
-            if member.get("id") == employee.get("id"):
+            if member.id == employee.id:
                 return self.staff
         self.staff.append(employee)
         return self.staff
 
     def remove_staff(self, employee_id):
         for employee in self.staff:
-            if employee.get("id") == employee_id:
+            if employee.id == employee_id:
                 self.staff.remove(employee)
                 return True
         return False
@@ -39,12 +41,28 @@ class Department:
         return len(self.staff)
 
     def to_dict(self):
-        return {"id": self.deptid, "name": self.departmentname, "staff": self.staff}
+        return {
+            "id": self.deptid,
+            "name": self.departmentname,
+            "staff": [employee.to_dict() for employee in self.staff],
+        }
 
     @classmethod
-    def from_dict(cls, record):
+    def from_dict(cls, record, scale=None):
         department = cls(record["id"], record["name"])
-        department.staff = record.get("staff", [])
+        scale = SalaryScale.load() if scale is None else scale
+        for employee_record in record.get("staff", []):
+            if not isinstance(employee_record, dict):
+                continue
+            title = str(employee_record.get("position_title", "")).strip().casefold()
+            if title not in scale:
+                continue
+            position = Position(title, department.departmentname, scale[title])
+            try:
+                employee = Employee.from_dict(employee_record, position)
+            except (KeyError, TypeError, ValueError):
+                continue
+            department.add_staff(employee)
         return department
 
 
@@ -211,7 +229,7 @@ class Employee:
             "date_of_birth": self.dateofbirth.isoformat(), "contact": self.contact,
             "village": self.village, "city": self.city, "gender": self.gender,
             "status": self.status, "position_title": self.position.title,
-            "department": self.department, "tax_resident": self.tax_resident,
+            "tax_resident": self.tax_resident,
         }
 
     @classmethod

@@ -82,7 +82,7 @@ def employees():
                 position,
                 request.form.get("tax_resident") == "yes",
             )
-            department.add_staff(employee.to_dict())
+            department.add_staff(employee)
             save_departments(departments)
             return redirect(url_for("employees", message="Employee added."))
         except (KeyError, TypeError, ValueError) as problem:

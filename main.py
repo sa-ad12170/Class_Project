@@ -12,21 +12,13 @@ PAYROLLS_FILE = "payrolls"
 
 def load_employees(scale):#purpose is to loaf all valid employees firm the departments and turn their saved json into their saved json records
     result = []
-    for department in load_departments():
-        for record in department.staff:
-            if not isinstance(record, dict):
-                continue
-            title = record.get("position_title", "regular worker")
-            if not isinstance(title, str):
-                continue
-            title = title.strip().casefold()
+    for department in load_departments(scale):
+        for employee in department.staff:
+            title = employee.position.title
             if title not in scale:
                 continue
-            position = Position(title, department.departmentname, scale[title])
-            try:
-                result.append(Employee.from_dict(record, position))
-            except (TypeError, ValueError):
-                print(f"Skipping invalid employee record: {record.get('id', '?')}")
+            employee.position.salary = scale[title]
+            result.append(employee)
     return result
 
 
@@ -115,7 +107,7 @@ def add_employee(departments, scale):
     except ValueError as error:
         print(f"Could not add employee: {error}")
         return
-    department.add_staff(employee.to_dict())
+    department.add_staff(employee)
     save_departments(departments)
     print(f"Added {employee.full_name}; salary scale: UGX {employee.salary:,.2f} per month.")
     if employee.status == "active":
