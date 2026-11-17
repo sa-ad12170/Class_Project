@@ -4,8 +4,8 @@
 
 {% block content %}
     <h2>Payroll runs</h2>
-    {% if message %}<p>{{ message }}</p>{% endif %}
-    {% if error %}<p>{{ error }}</p>{% endif %}
+    {% if message %}<p class="feedback success" role="status">{{ message }}</p>{% endif %}
+    {% if error %}<p class="feedback error" role="alert">{{ error }}</p>{% endif %}
 
     <h3>Start a payroll run</h3>
     <p>This calculates pay for all active employees using their current salaries and allowances.</p>

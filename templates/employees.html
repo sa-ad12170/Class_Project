@@ -4,8 +4,8 @@
 
 {% block content %}
     <h2>Employees</h2>
-    {% if message %}<p>{{ message }}</p>{% endif %}
-    {% if error %}<p>{{ error }}</p>{% endif %}
+    {% if message %}<p class="feedback success" role="status">{{ message }}</p>{% endif %}
+    {% if error %}<p class="feedback error" role="alert">{{ error }}</p>{% endif %}
 
     <h3>Add an employee</h3>
     <form action="{{ url_for('employees') }}" method="post">

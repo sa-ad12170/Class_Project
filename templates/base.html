@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Employee Management System{% endblock %}</title>
+    <meta name="theme-color" content="#173b35">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
-        <h1>Employee Management System</h1>
-        <nav>
-            <a href="{{ url_for('departments_page') }}">Departments</a> |
-            <a href="{{ url_for('employees') }}">Employees</a> |
-            <a href="{{ url_for('payroll_roster') }}">Payroll roster</a> |
-            <a href="{{ url_for('allowances') }}">Allowances</a> |
-            <a href="{{ url_for('positions') }}">Positions</a> |
-            <a href="{{ url_for('salary_scale') }}">Salary scale</a> |
-            <a href="{{ url_for('payrolls') }}">Run payroll</a> |
-            <a href="{{ url_for('payslips') }}">Payslips</a>
-        </nav>
-        <hr>
+        <a class="skip-link" href="#main-content">Skip to content</a>
+        <div class="site-header">
+            <a class="brand" href="{{ url_for('departments_page') }}">People<span>Pay</span></a>
+            <nav aria-label="Main navigation">
+                {% set nav_items = [
+                    ('departments_page', 'Departments'), ('employees', 'Employees'),
+                    ('payroll_roster', 'Payroll roster'), ('allowances', 'Allowances'),
+                    ('positions', 'Positions'), ('salary_scale', 'Salary scale'),
+                    ('payrolls', 'Run payroll'), ('payslips', 'Payslips')
+                ] %}
+                {% for endpoint, label in nav_items %}
+                    <a href="{{ url_for(endpoint) }}"{% if request.endpoint == endpoint %} aria-current="page"{% endif %}>{{ label }}</a>
+                {% endfor %}
+            </nav>
+        </div>
     </header>
 
-    <main>
+    <main id="main-content">
         {% block content %}{% endblock %}
     </main>
+    <footer>Employee management &amp; payroll</footer>
 </body>
 </html>

@@ -4,8 +4,8 @@
 
 {% block content %}
     <h2>Salary scale</h2>
-    {% if message %}<p>{{ message }}</p>{% endif %}
-    {% if error %}<p>{{ error }}</p>{% endif %}
+    {% if message %}<p class="feedback success" role="status">{{ message }}</p>{% endif %}
+    {% if error %}<p class="feedback error" role="alert">{{ error }}</p>{% endif %}
 
     <table border="1">
         <thead><tr><th>Position</th><th>Monthly salary (UGX)</th></tr></thead>
