@@ -194,12 +194,12 @@ class Employee:
         return age
 
     @property
-    def department(self):
-        return self.position.department
-
-    @property
     def salary(self):
         return self.position.salary
+
+    @property
+    def department(self):
+        return self.position.department
 
     @property
     def full_name(self):

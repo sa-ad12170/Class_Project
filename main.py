@@ -177,8 +177,7 @@ def remove_employee(scale):
         print("Removal cancelled.")
         return
 
-    # Remove the employee from the department staff list.
-    departments = load_departments()
+    departments = load_departments(scale)
     for department in departments:
         department.remove_staff(selected.id)
     save_departments(departments)
